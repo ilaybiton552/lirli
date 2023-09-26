@@ -23,6 +23,20 @@ namespace Project_API
         public MainWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+        }
+
+        private void Password_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbPass.Text = string.Empty;
+            tbPass.Foreground = Brushes.Black;
+            tbPass.GotFocus -= Password_GotFocus;
+        }
+
+
+        private void Password_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

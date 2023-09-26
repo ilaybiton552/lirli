@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_API"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="350" Width="300">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="David"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="32.5"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="David"/>
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="FontSize" Value="32.5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+
+    </Window.Resources>
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="Hi Lirli"/>
+            <TextBlock Text="Please enter a password to continue:"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <TextBox x:Name="tbPass" Width="150" Text="ddmmyy" Margin="5, 15, 5, 15"/>
+            <TextBlock Text="Please pay attention to the format of the password" FontSize="20" Foreground="Red"/>
+        </StackPanel>
         
     </Grid>
 </Window>

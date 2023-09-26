@@ -1,0 +1,16 @@
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\bin\Debug\Project_API.exe.config
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\bin\Debug\Project_API.exe
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\bin\Debug\Project_API.pdb
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API.csproj.AssemblyReference.cache
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API.csproj.SuggestedBindingRedirects.cache
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MainWindow.g.cs
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\App.g.cs
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API_MarkupCompile.cache
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API_MarkupCompile.lref
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MainWindow.baml
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API.g.resources
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API.Properties.Resources.resources
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API.csproj.GenerateResource.cache
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API.csproj.CoreCompileInputs.cache
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API.exe
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\Project_API.pdb
