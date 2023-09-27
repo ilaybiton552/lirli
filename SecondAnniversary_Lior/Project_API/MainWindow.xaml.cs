@@ -26,17 +26,19 @@ namespace Project_API
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
-        private void Password_GotFocus(object sender, RoutedEventArgs e)
+        private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
-            tbPass.Text = string.Empty;
-            tbPass.Foreground = Brushes.Black;
-            tbPass.GotFocus -= Password_GotFocus;
+            ((Border)sender).Background = Brushes.AliceBlue;
         }
 
-
-        private void Password_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Border_MouseLeave(object sender, MouseEventArgs e)
         {
+            ((Border)sender).Background = Brushes.White;
+        }
 
+        private void SendPass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show(tbPass.Text);
         }
     }
 }

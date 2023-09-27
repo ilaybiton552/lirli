@@ -20,17 +20,19 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontFamily" Value="David"/>
-            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="32.5"/>
             <Setter Property="BorderBrush" Value="Black"/>
         </Style>
 
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.66*"/>
+            <RowDefinition Height="0.66*"/>
+            <RowDefinition Height="0.66*"/>
         </Grid.RowDefinitions>
 
         <StackPanel>
@@ -38,10 +40,20 @@
             <TextBlock Text="Please enter a password to continue:"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1">
-            <TextBox x:Name="tbPass" Width="150" Text="ddmmyy" Margin="5, 15, 5, 15"/>
-            <TextBlock Text="Please pay attention to the format of the password" FontSize="20" Foreground="Red"/>
-        </StackPanel>
+        <!--<Border Grid.Row="1" CornerRadius="5" BorderThickness="1" BorderBrush="Black" Margin="10" Width="150" Height="33">
+            <TextBlock Text="ddmmyy" Foreground="LightGray" Margin="0"/>
+        </Border>-->
+        <TextBox Grid.Row="1" x:Name="tbPass" Background="Transparent" Height="34" Text="ddmmyy" Width="150"/>
         
+        <TextBlock Grid.Row="2" Text="Please pay attention to the format of the password" 
+                   FontSize="20" Foreground="Red" Margin="5"/>
+
+        <Border Grid.Row="3" CornerRadius="5" Width="150" Height="30" Margin="0, 0, 0, 10"
+                BorderBrush="Black" BorderThickness="1"
+                MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave"
+                MouseLeftButtonDown="SendPass_MouseLeftButtonDown">
+            <TextBlock Text="Send" Margin="0"/>
+        </Border> 
+
     </Grid>
 </Window>
