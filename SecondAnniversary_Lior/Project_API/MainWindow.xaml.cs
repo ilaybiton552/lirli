@@ -43,14 +43,27 @@ namespace Project_API
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("ilaybiton6@gmail.com", "ilay1309"),
                 EnableSsl = true,
+                UseDefaultCredentials = false,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Credentials = new NetworkCredential("ilaybiton6@gmail.com", "mbwe brvc mpnc szzc"),
             };
 
-            smtpClient.Send("ilaybiton6@gmail.com", "ilaybh552@gmail.com", 
-                "Password for Anniversary Gift", 
-                "The entered password is " + tbPass.Text);
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("ilaybiton6@gmail.com");
+            mailMessage.To.Add("ilaybh552@gmail.com");
+            mailMessage.Subject = "Password for Anniversary Gift";
+            mailMessage.Body = "The used password is " + tbPass.Text;
+
+            try
+            {
+                smtpClient.Send(mailMessage);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error in sending email:\n" + ex.Message);
+            }
+
         }
     }
 }
