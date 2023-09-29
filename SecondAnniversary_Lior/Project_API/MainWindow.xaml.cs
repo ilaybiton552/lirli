@@ -126,9 +126,7 @@ namespace Project_API
                 TextBox textBox = (TextBox)sender;
                 if (textBox.Text.Length == 1 && e.Key != Key.Back)
                 {
-                    textBox.Text = (e.Key - Key.D0).ToString();
-                    blockKey = true;
-                    e.Handled = true;
+                    textBox.Text = string.Empty;
                 }
                 else if (textBox.Text.Length == 0 && e.Key == Key.Back)
                 {
