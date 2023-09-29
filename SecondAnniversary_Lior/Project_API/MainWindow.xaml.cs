@@ -82,12 +82,31 @@ namespace Project_API
         {
             if (!blockKey)
             {
-                if (e.Key != Key.Delete)
+                if (e.Key != Key.Back)
                 {
                     display[currentTextBox].Text = string.Empty;
                     if (currentTextBox < 5)
                     {
                         FocusManager.SetFocusedElement(this, date[++currentTextBox]);
+                    }
+                }
+                else
+                {
+                    TextBox textBox = (TextBox)sender;
+                    if (textBox.Text.Length == 0)
+                    {
+                        switch(currentTextBox)
+                        {
+                            case 0: case 1:
+                                display[currentTextBox].Text = "d";
+                                break;
+                            case 2: case 3:
+                                display[currentTextBox].Text = "m";
+                                break;
+                            case 4: case 5:
+                                display[currentTextBox].Text = "y";
+                                break;
+                        }
                     }
                 }
             }
@@ -107,6 +126,16 @@ namespace Project_API
                 TextBox textBox = (TextBox)sender;
                 if (textBox.Text.Length == 1 && e.Key != Key.Back)
                 {
+                    textBox.Text = (e.Key - Key.D0).ToString();
+                    blockKey = true;
+                    e.Handled = true;
+                }
+                else if (textBox.Text.Length == 0 && e.Key == Key.Back)
+                {
+                    if (currentTextBox > 0)
+                    {
+                        FocusManager.SetFocusedElement(this, date[--currentTextBox]);
+                    }
                     blockKey = true;
                     e.Handled = true;
                 }
