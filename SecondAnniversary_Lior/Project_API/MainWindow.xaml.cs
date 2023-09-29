@@ -24,6 +24,8 @@ namespace Project_API
     {
         TextBox[] display = new TextBox[6];
         TextBox[] date = new TextBox[6];
+        int currentTextBox = 0;
+        bool blockKey = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -75,5 +77,41 @@ namespace Project_API
             }
 
         }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!blockKey)
+            {
+                if (e.Key != Key.Delete)
+                {
+                    display[currentTextBox].Text = string.Empty;
+                    if (currentTextBox < 5)
+                    {
+                        FocusManager.SetFocusedElement(this, date[++currentTextBox]);
+                    }
+                }
+            }
+            else
+                blockKey = false;
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Key < Key.D0 || e.Key > Key.D9) && e.Key != Key.Back)
+            {
+                blockKey = true;
+                e.Handled = true;
+            }
+            else
+            {
+                TextBox textBox = (TextBox)sender;
+                if (textBox.Text.Length == 1 && e.Key != Key.Back)
+                {
+                    blockKey = true;
+                    e.Handled = true;
+                }
+            }
+        }
+
     }
 }
