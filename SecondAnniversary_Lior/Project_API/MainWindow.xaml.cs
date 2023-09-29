@@ -59,9 +59,9 @@ namespace Project_API
             {
                 smtpClient.Send(mailMessage);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
-                MessageBox.Show("Error in sending email:\n" + ex.Message);
+                MessageBox.Show("Please check your internet connection");
             }
 
         }
