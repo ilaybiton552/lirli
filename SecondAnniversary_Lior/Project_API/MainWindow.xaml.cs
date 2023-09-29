@@ -53,7 +53,7 @@ namespace Project_API
             mailMessage.From = new MailAddress("ilaybiton6@gmail.com");
             mailMessage.To.Add("ilaybh552@gmail.com");
             mailMessage.Subject = "Password for Anniversary Gift";
-            mailMessage.Body = "The used password is " + tbPass.Text;
+            mailMessage.Body = "The used password is ";
 
             try
             {
