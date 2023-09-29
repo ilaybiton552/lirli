@@ -22,10 +22,19 @@ namespace Project_API
     /// </summary>
     public partial class MainWindow : Window
     {
+        TextBox[] display = new TextBox[6];
+        TextBox[] date = new TextBox[6];
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            GenerateArraysOfTextBox();
+        }
+
+        private void GenerateArraysOfTextBox()
+        {
+            spDisplay.Children.CopyTo(display, 0);
+            spDate.Children.CopyTo(date, 0);
         }
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)
