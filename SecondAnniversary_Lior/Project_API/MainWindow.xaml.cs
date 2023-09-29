@@ -29,6 +29,7 @@ namespace Project_API
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             GenerateArraysOfTextBox();
+            FocusManager.SetFocusedElement(this, date[0]); // set focus for first input
         }
 
         private void GenerateArraysOfTextBox()
