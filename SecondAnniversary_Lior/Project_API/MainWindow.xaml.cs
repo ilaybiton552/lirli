@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace Project_API
 {
@@ -52,6 +53,8 @@ namespace Project_API
 
         private void SendPass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            string password = GetPassword();
+
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
@@ -65,15 +68,38 @@ namespace Project_API
             mailMessage.From = new MailAddress("ilaybiton6@gmail.com");
             mailMessage.To.Add("ilaybh552@gmail.com");
             mailMessage.Subject = "Password for Anniversary Gift";
-            mailMessage.Body = "The used password is ";
+            mailMessage.Body = "The used password is " + password;
 
             try
             {
                 smtpClient.Send(mailMessage);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Please check your internet connection");
+                return;
+            }
+
+            switch (password)
+            {
+                case "130906":
+                    MessageBox.Show("Haha like the way you think :)\nBut this is about you not me");
+                    break;
+                case "311006":
+                    MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
+                    break;
+                case "200621":
+                    // TODO: create window for 2nd anniversary day
+                    MessageBox.Show("Wasn't too hard huh?");
+                    break;
+                case "240923":
+                    // TODO: create window for breakup day
+                    MessageBox.Show("Wonder how much time it took...");
+                    break;
+                default:
+                    GenerateRandomHint();
+                    break;
+
             }
 
         }
@@ -138,6 +164,36 @@ namespace Project_API
                     e.Handled = true;
                 }
             }
+        }
+
+        private string GetPassword()
+        {
+            string password = string.Empty;
+            foreach (TextBox tb in date)
+            {
+                password += tb.Text;
+            }
+            return password;
+        }
+
+        private void GenerateRandomHint()
+        {
+            Random rnd = new Random();
+            int num = rnd.Next(1, 101);
+
+            if (num < 11) // 10% chance
+            {
+                MessageBox.Show("Think about the breakup...");
+            }
+            else if (num > 10 && num < 61) // 50% chance
+            {
+                MessageBox.Show("Anniversaryyyyyyyyy!!!!");
+            }
+            else
+            {
+                MessageBox.Show("Nahhh no hint for now");
+            }
+
         }
 
     }
