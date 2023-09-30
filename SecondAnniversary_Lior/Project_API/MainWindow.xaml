@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_API"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="300">
+        Title="MainWindow" Height="360" Width="300"
+        WindowStyle="None">
 
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontFamily" Value="David"/>
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="32.5"/>
         </Style>
 
@@ -33,18 +34,19 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.66*"/>
-            <RowDefinition Height="0.66*"/>
-            <RowDefinition Height="0.66*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel>
+        <StackPanel Grid.Row="1">
             <TextBlock Text="Hi Lirli"/>
             <TextBlock Text="Please enter a password to continue:"/>
         </StackPanel>
 
-        <Border Grid.Row="1" CornerRadius="5" BorderThickness="1.5" BorderBrush="Black" Margin="10, 5, 10, 0" Width="150" Height="33">
+        <Border Grid.Row="2" CornerRadius="5" BorderThickness="1.5" BorderBrush="Black" Margin="10, 5, 10, 0" Width="150" Height="33">
             <StackPanel x:Name="spDisplay" Orientation="Horizontal">
                 <TextBox Text="d" Margin="0, 0, -1.6, 0" IsReadOnly="True"/>
                 <TextBox Text="d" Margin="-1.6, 0, -1.6, 0" IsReadOnly="True"/>
@@ -55,7 +57,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="1" CornerRadius="5" BorderThickness="1.5" BorderBrush="Black" Margin="10, 5, 10, 0" Width="150" Height="33">
+        <Border Grid.Row="2" CornerRadius="5" BorderThickness="1.5" BorderBrush="Black" Margin="10, 5, 10, 0" Width="150" Height="33">
             <StackPanel x:Name="spDate" Orientation="Horizontal">
                 <TextBox Foreground="Black" TextDecorations="None" Margin="0, 0, -1.6, 0" KeyUp="TextBox_KeyUp" PreviewKeyDown="TextBox_PreviewKeyDown"/>
                 <TextBox Foreground="Black" TextDecorations="None" Margin="-1.6, 0, -1.6, 0" KeyUp="TextBox_KeyUp" PreviewKeyDown="TextBox_PreviewKeyDown"/>
@@ -66,10 +68,10 @@
             </StackPanel>
         </Border>
 
-        <TextBlock Grid.Row="2" Text="Please pay attention to the format of the password" 
+        <TextBlock Grid.Row="3" Text="Please pay attention to the format of the password" 
                    FontSize="20" Foreground="Red" Margin="5"/>
 
-        <Border Grid.Row="3" CornerRadius="5" Width="150" Height="30" Margin="0, 0, 0, 10"
+        <Border Grid.Row="4" CornerRadius="5" Width="150" Height="30" Margin="0, 0, 0, 10"
                 BorderBrush="Black" BorderThickness="1"
                 MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave"
                 MouseLeftButtonDown="SendPass_MouseLeftButtonDown">
