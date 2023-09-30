@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
+using System.Media;
 
 namespace Project_API
 {
@@ -23,16 +24,24 @@ namespace Project_API
     /// </summary>
     public partial class MainWindow : Window
     {
-        TextBox[] display = new TextBox[6];
-        TextBox[] date = new TextBox[6];
-        int currentTextBox = 0;
-        bool blockKey = false;
+        private TextBox[] display = new TextBox[6];
+        private TextBox[] date = new TextBox[6];
+        private int currentTextBox = 0;
+        private bool blockKey = false;
+        private SoundPlayer player;
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             GenerateArraysOfTextBox();
             FocusManager.SetFocusedElement(this, date[0]); // set focus for first input
+            PlaySong();
+        }
+
+        private void PlaySong()
+        {
+            player = new SoundPlayer("hotline.wav");
+            player.PlayLooping();
         }
 
         private void GenerateArraysOfTextBox()
@@ -84,22 +93,25 @@ namespace Project_API
             {
                 case "130906":
                     MessageBox.Show("Haha like the way you think :)\nBut this is about you not me");
+                    player.Stop();
                     break;
                 case "311006":
                     MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
+                    player.Stop();
                     break;
                 case "200621":
                     // TODO: create window for 2nd anniversary day
                     MessageBox.Show("Wasn't too hard huh?");
+                    player.Stop();
                     break;
                 case "240923":
                     // TODO: create window for breakup day
                     MessageBox.Show("Wonder how much time it took...");
+                    player.Stop();
                     break;
                 default:
                     GenerateRandomHint();
                     break;
-
             }
 
         }
