@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Project_API"
         mc:Ignorable="d"
         Title="MainWindow" Height="360" Width="300"
-        WindowStyle="None">
+        WindowStyle="None" AllowsTransparency="True">
 
     <Window.Resources>
         <Style TargetType="TextBlock">
@@ -40,6 +40,12 @@
             <RowDefinition Height="0.8*"/>
             <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
+
+        <TextBlock Text="X" Background="Transparent" TextAlignment="Center" 
+                   HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="20" 
+                   Width="40" Height="35" MouseEnter="Button_MouseEnter" 
+                   MouseLeave="Button_MouseLeave" Margin="0" Padding="0, 10, 0, 0" 
+                   MouseLeftButtonDown="Close_Click" FontFamily="Aharoni"/>
 
         <StackPanel Grid.Row="1">
             <TextBlock Text="Hi Lirli"/>

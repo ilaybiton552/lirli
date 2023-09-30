@@ -208,5 +208,21 @@ namespace Project_API
 
         }
 
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((TextBlock)sender).Background = Brushes.Red;
+            ((TextBlock)sender).Foreground = Brushes.White;
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((TextBlock)sender).Background = Brushes.Transparent;
+            ((TextBlock)sender).Foreground = Brushes.Black;
+        }
     }
 }
