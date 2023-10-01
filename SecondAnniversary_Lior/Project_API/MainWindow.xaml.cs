@@ -228,10 +228,7 @@ namespace Project_API
 
         private void ChangeImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Image image = new Image();
-            image.Width = 40;
-            image.Height = 35;
-            image.MouseLeftButtonDown += ChangeImage_MouseLeftButtonDown;
+            Image image = sender as Image;
             if (mute)
             {
                 image.Source = new BitmapImage(new Uri(@"images\sound.png", UriKind.Relative));
@@ -242,8 +239,6 @@ namespace Project_API
                 image.Source = new BitmapImage(new Uri(@"images\mute.png", UriKind.Relative));
                 player.Stop();
             }
-            spSound.Children.Clear();
-            spSound.Children.Add(image);
             mute = !mute;
         }
     }
