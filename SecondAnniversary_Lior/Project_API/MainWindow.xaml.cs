@@ -29,6 +29,7 @@ namespace Project_API
         private int currentTextBox = 0;
         private bool blockKey = false;
         private SoundPlayer player;
+        private bool mute = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -223,6 +224,27 @@ namespace Project_API
         {
             ((TextBlock)sender).Background = Brushes.Transparent;
             ((TextBlock)sender).Foreground = Brushes.Black;
+        }
+
+        private void ChangeImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image image = new Image();
+            image.Width = 40;
+            image.Height = 35;
+            image.MouseLeftButtonDown += ChangeImage_MouseLeftButtonDown;
+            if (mute)
+            {
+                image.Source = new BitmapImage(new Uri(@"images\sound.png", UriKind.Relative));
+                player.PlayLooping();
+            }
+            else
+            {
+                image.Source = new BitmapImage(new Uri(@"images\mute.png", UriKind.Relative));
+                player.Stop();
+            }
+            spSound.Children.Clear();
+            spSound.Children.Add(image);
+            mute = !mute;
         }
     }
 }

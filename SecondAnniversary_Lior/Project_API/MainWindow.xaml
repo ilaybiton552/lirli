@@ -47,6 +47,10 @@
                    MouseLeave="Button_MouseLeave" Margin="0" Padding="0, 10, 0, 0" 
                    MouseLeftButtonDown="Close_Click" FontFamily="Aharoni"/>
 
+        <StackPanel x:Name="spSound" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image Source="/images/sound.png" Height="35" Width="40" MouseLeftButtonDown="ChangeImage_MouseLeftButtonDown"/>
+        </StackPanel>
+
         <StackPanel Grid.Row="1">
             <TextBlock Text="Hi Lirli"/>
             <TextBlock Text="Please enter a password to continue:"/>
