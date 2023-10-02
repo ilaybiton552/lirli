@@ -24,7 +24,7 @@ bool writeToFile(HANDLE readFile, HANDLE writeFile)
 
 int main()
 {
-	HANDLE hfileAutorun, hfileCopy, hfileSurprise, hfileCopy2;
+	HANDLE hfileAutorun, hfileCopy, hfileSurprise;
 	wchar_t ownPath[MAX_PATH];
 	PCWSTR dictname = L"C:\\Program Files\\Anniversary Gift";
 	PCWSTR filenameAutorun = L"C:\\Program Files\\Anniversary Gift\\gift.exe";
@@ -37,37 +37,12 @@ int main()
 	{
 		mkdir("C:\\Program Files\\Anniversary Gift"); // creating new folder in program files
 
-		// creating file for the autorun
-		hfileAutorun = CreateFile(filenameAutorun, GENERIC_WRITE, NULL, NULL, OPEN_ALWAYS, FILE_FLAG_BACKUP_SEMANTICS, NULL);
-		if (hfileAutorun == INVALID_HANDLE_VALUE) // error opening file
-		{
-			return 1;
-		}
-
 		// creating file for the suprise (wpf)
 		hfileSurprise = CreateFile(filenameSurprise, GENERIC_WRITE, NULL, NULL, OPEN_ALWAYS, FILE_FLAG_BACKUP_SEMANTICS, NULL);
 		if (hfileSurprise == INVALID_HANDLE_VALUE) // error opening file
 		{
 			return 1;
 		}
-
-		// get the current path of the file
-		GetModuleFileName(NULL, ownPath, sizeof(ownPath));
-		
-		// open the file with the current path
-		hfileCopy = CreateFile(ownPath, GENERIC_READ, NULL, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-		if (hfileCopy == INVALID_HANDLE_VALUE)
-		{
-			return 1;
-		}
-
-		// copies the binary data of the file from the current path to the program files path
-		if (!writeToFile(hfileCopy, hfileAutorun))
-		{
-			return 1;
-		}
-
-		CloseHandle(hfileCopy);
 		
 		// open the file with the current path
 		// apparantly you can use relative path 
@@ -90,7 +65,7 @@ int main()
 			return 1;
 		}
 
-		if (RegSetValueEx(openRun, L"AnniGift", 0, REG_SZ, (LPBYTE)L"C:\\Program Files\\Anniversary Gift\\gift.exe", MAX_PATH) != ERROR_SUCCESS)
+		if (RegSetValueEx(openRun, L"AnniGift", 0, REG_SZ, (LPBYTE)L"C:\\Program Files\\Anniversary Gift\\surprise.exe", MAX_PATH) != ERROR_SUCCESS)
 		{
 			return 1;
 		}
@@ -100,8 +75,6 @@ int main()
 	}
 
 	CloseHandle(hfileAutorun);
-
-	// logic for window itself
 
 	return 0;
 }
