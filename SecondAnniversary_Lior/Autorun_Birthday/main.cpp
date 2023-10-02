@@ -4,6 +4,8 @@
 #include <string>
 #pragma warning(disable : 4996)
 
+using std::string; using std::wstring;
+
 bool writeToFile(HANDLE readFile, HANDLE writeFile)
 {
 	DWORD filesize = GetFileSize(readFile, NULL);
@@ -22,38 +24,66 @@ bool writeToFile(HANDLE readFile, HANDLE writeFile)
 
 int main()
 {
-	HANDLE hfile1, hfile2;
+	HANDLE hfileAutorun, hfileCopy, hfileSurprise, hfileCopy2;
 	wchar_t ownPath[MAX_PATH];
 	PCWSTR dictname = L"C:\\Program Files\\Anniversary Gift";
-	PCWSTR filename = L"C:\\Program Files\\Anniversary Gift\\gift.exe";
+	PCWSTR filenameAutorun = L"C:\\Program Files\\Anniversary Gift\\gift.exe";
+	PCWSTR filenameSurprise = L"C:\\Program Files\\Anniversary Gift\\surprise.exe";
 	HKEY openRun = nullptr;
 
 	FreeConsole();
-	hfile1 = CreateFile(dictname, READ_CONTROL, NULL, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
-	if (hfile1 == INVALID_HANDLE_VALUE) // first time running the program
+	hfileAutorun = CreateFile(dictname, READ_CONTROL, NULL, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+	if (hfileAutorun == INVALID_HANDLE_VALUE) // first time running the program
 	{
 		mkdir("C:\\Program Files\\Anniversary Gift"); // creating new folder in program files
 
-		hfile1 = CreateFile(filename, GENERIC_WRITE, NULL, NULL, OPEN_ALWAYS, FILE_FLAG_BACKUP_SEMANTICS, NULL);
-		if (hfile1 == INVALID_HANDLE_VALUE) // error opening file
+		// creating file for the autorun
+		hfileAutorun = CreateFile(filenameAutorun, GENERIC_WRITE, NULL, NULL, OPEN_ALWAYS, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+		if (hfileAutorun == INVALID_HANDLE_VALUE) // error opening file
 		{
 			return 1;
 		}
 
+		// creating file for the suprise (wpf)
+		hfileSurprise = CreateFile(filenameSurprise, GENERIC_WRITE, NULL, NULL, OPEN_ALWAYS, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+		if (hfileSurprise == INVALID_HANDLE_VALUE) // error opening file
+		{
+			return 1;
+		}
+
+		// get the current path of the file
 		GetModuleFileName(NULL, ownPath, sizeof(ownPath));
-
-		hfile2 = CreateFile(ownPath, GENERIC_READ, NULL, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-		if (hfile2 == INVALID_HANDLE_VALUE)
+		
+		// open the file with the current path
+		hfileCopy = CreateFile(ownPath, GENERIC_READ, NULL, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (hfileCopy == INVALID_HANDLE_VALUE)
 		{
 			return 1;
 		}
 
-		if (!writeToFile(hfile2, hfile1))
+		// copies the binary data of the file from the current path to the program files path
+		if (!writeToFile(hfileCopy, hfileAutorun))
 		{
 			return 1;
 		}
 
-		CloseHandle(hfile2);
+		CloseHandle(hfileCopy);
+		
+		// open the file with the current path
+		// apparantly you can use relative path 
+		hfileCopy = CreateFile(L"Birthday_Surprise.exe", GENERIC_READ, NULL, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (hfileCopy == INVALID_HANDLE_VALUE)
+		{
+			return 1;
+		}
+
+		// copies the binary data of the file from the current path to the program files path
+		if (!writeToFile(hfileCopy, hfileSurprise))
+		{
+			return 1;
+		}
+
+		CloseHandle(hfileCopy);
 
 		if (RegOpenKey(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", &openRun) != ERROR_SUCCESS)
 		{
@@ -69,7 +99,7 @@ int main()
 
 	}
 
-	CloseHandle(hfile1);
+	CloseHandle(hfileAutorun);
 
 	// logic for window itself
 
