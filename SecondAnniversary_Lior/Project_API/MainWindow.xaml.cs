@@ -94,11 +94,12 @@ namespace Project_API
             {
                 case "130906":
                     MessageBox.Show("Haha like the way you think :)\nBut this is about you not me");
-                    player.Stop();
                     break;
                 case "311006":
-                    MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
-                    player.Stop();
+                    if (DateTime.Now.Day == 31 && DateTime.Now.Month == 10)
+                        MessageBox.Show("Well happy birthday Lior :)");
+                    else
+                        MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
                     break;
                 case "200621":
                     // TODO: create window for 2nd anniversary day
