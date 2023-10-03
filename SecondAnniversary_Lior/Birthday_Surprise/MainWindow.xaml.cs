@@ -20,8 +20,13 @@ namespace Birthday_Surprise
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
+            if (!(DateTime.Now.Day == 31 && DateTime.Now.Month == 10))
+            {
+                Close();
+            }
             InitializeComponent();
         }
     }
