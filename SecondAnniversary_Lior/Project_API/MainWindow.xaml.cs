@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using System.Media;
 
 namespace Project_API
 {
@@ -22,16 +24,25 @@ namespace Project_API
     /// </summary>
     public partial class MainWindow : Window
     {
-        TextBox[] display = new TextBox[6];
-        TextBox[] date = new TextBox[6];
-        int currentTextBox = 0;
-        bool blockKey = false;
+        private TextBox[] display = new TextBox[6];
+        private TextBox[] date = new TextBox[6];
+        private int currentTextBox = 0;
+        private bool blockKey = false;
+        private SoundPlayer player;
+        private bool mute = false;
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             GenerateArraysOfTextBox();
             FocusManager.SetFocusedElement(this, date[0]); // set focus for first input
+            PlaySong();
+        }
+
+        private void PlaySong()
+        {
+            player = new SoundPlayer("hotline.wav");
+            player.PlayLooping();
         }
 
         private void GenerateArraysOfTextBox()
@@ -52,6 +63,8 @@ namespace Project_API
 
         private void SendPass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            string password = GetPassword();
+
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
@@ -65,15 +78,42 @@ namespace Project_API
             mailMessage.From = new MailAddress("ilaybiton6@gmail.com");
             mailMessage.To.Add("ilaybh552@gmail.com");
             mailMessage.Subject = "Password for Anniversary Gift";
-            mailMessage.Body = "The used password is ";
+            mailMessage.Body = "The used password is " + password;
 
             try
             {
                 smtpClient.Send(mailMessage);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Please check your internet connection");
+                return;
+            }
+
+            switch (password)
+            {
+                case "130906":
+                    MessageBox.Show("Haha like the way you think :)\nBut this is about you not me");
+                    break;
+                case "311006":
+                    if (DateTime.Now.Day == 31 && DateTime.Now.Month == 10)
+                        MessageBox.Show("Well happy birthday Lior :)");
+                    else
+                        MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
+                    break;
+                case "200621":
+                    // TODO: create window for 2nd anniversary day
+                    MessageBox.Show("Wasn't too hard huh?");
+                    player.Stop();
+                    break;
+                case "240923":
+                    // TODO: create window for breakup day
+                    MessageBox.Show("Wonder how much time it took...");
+                    player.Stop();
+                    break;
+                default:
+                    GenerateRandomHint();
+                    break;
             }
 
         }
@@ -140,5 +180,67 @@ namespace Project_API
             }
         }
 
+        private string GetPassword()
+        {
+            string password = string.Empty;
+            foreach (TextBox tb in date)
+            {
+                password += tb.Text;
+            }
+            return password;
+        }
+
+        private void GenerateRandomHint()
+        {
+            Random rnd = new Random();
+            int num = rnd.Next(1, 101);
+
+            if (num < 11) // 10% chance
+            {
+                MessageBox.Show("Think about the breakup...");
+            }
+            else if (num > 10 && num < 61) // 50% chance
+            {
+                MessageBox.Show("Anniversaryyyyyyyyy!!!!");
+            }
+            else
+            {
+                MessageBox.Show("Nahhh no hint for now");
+            }
+
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((TextBlock)sender).Background = Brushes.Red;
+            ((TextBlock)sender).Foreground = Brushes.White;
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((TextBlock)sender).Background = Brushes.Transparent;
+            ((TextBlock)sender).Foreground = Brushes.Black;
+        }
+
+        private void ChangeImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image image = sender as Image;
+            if (mute)
+            {
+                image.Source = new BitmapImage(new Uri(@"images\sound.png", UriKind.Relative));
+                player.PlayLooping();
+            }
+            else
+            {
+                image.Source = new BitmapImage(new Uri(@"images\mute.png", UriKind.Relative));
+                player.Stop();
+            }
+            mute = !mute;
+        }
     }
 }
