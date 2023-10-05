@@ -8,7 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/mute.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/sound.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/loop.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/lyrics.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/next.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/pause.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/play.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffle.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/start.png")]
 
 
