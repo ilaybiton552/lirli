@@ -31,6 +31,7 @@ namespace Project_API
         public SongPlayer(string[] songs)
         {
             InitializeComponent();
+            preSongs = new Queue<int>();
             this.songs = songs;
             currentSong = 0;
             isPlaying = false;
@@ -44,6 +45,7 @@ namespace Project_API
         private void PlaySong()
         {
             var uri = new Uri(songs[currentSong], UriKind.Relative);
+            preSongs.Append(currentSong);
             player.Open(uri);
             player.Play();
         }
@@ -59,12 +61,12 @@ namespace Project_API
             string path;
             if (isPlaying)
             {
-                path = "pause";
+                path = @"pause";
                 player.Pause();
             }
             else
             {
-                path = "play";
+                path = @"play";
                 player.Play();
             }
             image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
@@ -75,8 +77,8 @@ namespace Project_API
         {
             Image image = sender as Image;
             string path;
-            if (isLoop) path = "loop_off";
-            else path = "loop_on";
+            if (isLoop) path = @"loop_off";
+            else path = @"loop_on";
             image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
             isLoop = !isLoop;
         }
@@ -97,8 +99,8 @@ namespace Project_API
         {
             Image image = sender as Image;
             string path;
-            if (isLoop) path = "shuffle_off";
-            else path = "shuffle_on";
+            if (isLoop) path = @"shuffle_off";
+            else path = @"shuffle_on";
             image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
             isShuffle = !isShuffle;
         }
@@ -109,7 +111,6 @@ namespace Project_API
             {
                 if (isShuffle) GenerateRandomSong();
                 else currentSong = (currentSong + 1) % songs.Length;
-                preSongs.Append(currentSong);
             }
             PlaySong();
         }

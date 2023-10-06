@@ -102,9 +102,10 @@ namespace Project_API
                         MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
                     break;
                 case "200621":
-                    // TODO: create window for 2nd anniversary day
-                    MessageBox.Show("Wasn't too hard huh?");
+                    AnniversaryWindow window = new AnniversaryWindow();
                     player.Stop();
+                    Close();
+                    window.ShowDialog();
                     break;
                 case "240923":
                     // TODO: create window for breakup day
