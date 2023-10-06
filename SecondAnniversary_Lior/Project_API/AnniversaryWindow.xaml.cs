@@ -19,7 +19,7 @@ namespace Project_API
     /// </summary>
     public partial class AnniversaryWindow : Window
     {
-        private string[] songs;
+        private Song[] songs;
 
         public AnniversaryWindow()
         {
@@ -30,17 +30,36 @@ namespace Project_API
 
         private void LoadSongs()
         {
-            songs = new string[]
+            songs = new Song[]
             {
-                "Big-Jet-Plane.mp3",
-                "Get-You-The-Moon.mp3",
-                "You-Are-Enough.mp3",
-                "Happiest-Year.mp3",
-                "Here-With-Me.mp3",
-                "I-GUESS-I'M-IN-LOVE.mp3",
-                "Those-Eyes.mp3"
+                new Song("Big Jet Plane", "Angus & Julia Stone", "Big-Jet-Plane.mp3"),
+                new Song("Get You The Moon (feat. Snow)", "Kina, Snow", "Get-You-The-Moon.mp3"),
+                new Song("You Are Enough", "Sleeping At Last", "You-Are-Enough.mp3"),
+                new Song("Happiest Year", "Jaymes Young", "Happiest-Year.mp3"),
+                new Song("Here With Me", "d4vd", "Here-With-Me.mp3"),
+                new Song("I GUESS I'M IN LOVE", "Clinton Kane", "I-GUESS-I'M-IN-LOVE.mp3"),
+                new Song("Those Eyes", "New West", "Those-Eyes.mp3")
             };
         }
 
     }
+
+    public class Song
+    {
+        private string name;
+        private string author;
+        private string path;
+
+        public Song(string name, string author, string path)
+        {
+            this.name = name;
+            this.author = author;
+            this.path = path;
+        }
+
+        public string Name { get { return name; } }
+        public string Author { get { return author; } }
+        public string Path { get { return path; } }
+    }
+
 }

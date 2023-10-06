@@ -20,7 +20,7 @@ namespace Project_API
     /// </summary>
     public partial class SongPlayer : UserControl
     {
-        private string[] songs;
+        private Song[] songs;
         private int currentSong;
         private MediaPlayer player;
         private bool isPlaying;
@@ -28,7 +28,7 @@ namespace Project_API
         private bool isShuffle;
         private Queue<int> preSongs;
 
-        public SongPlayer(string[] songs)
+        public SongPlayer(Song[] songs)
         {
             InitializeComponent();
             preSongs = new Queue<int>();
@@ -44,7 +44,7 @@ namespace Project_API
 
         private void PlaySong()
         {
-            var uri = new Uri(songs[currentSong], UriKind.Relative);
+            var uri = new Uri(songs[currentSong].Path, UriKind.Relative);
             preSongs.Append(currentSong);
             player.Open(uri);
             player.Play();

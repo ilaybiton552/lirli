@@ -21,9 +21,9 @@ namespace Project_API
     /// </summary>
     public partial class SongInterface : UserControl
     {
-        private string[] songs;
+        private Song[] songs;
 
-        public SongInterface(string[] songs)
+        public SongInterface(Song[] songs)
         {
             InitializeComponent();
             this.songs = songs;
