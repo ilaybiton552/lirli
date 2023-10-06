@@ -8,12 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/loop.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/lyrics.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/next.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/pause.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/play.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffle.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/start.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/loop_off.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/loop_on.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffle_off.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffle_on.png")]
 
 

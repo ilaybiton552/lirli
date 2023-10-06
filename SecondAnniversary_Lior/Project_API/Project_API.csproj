@@ -106,13 +106,17 @@
     <Resource Include="images\sound.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\loop.png" />
     <Resource Include="images\lyrics.png" />
     <Resource Include="images\next.png" />
     <Resource Include="images\pause.png" />
     <Resource Include="images\play.png" />
-    <Resource Include="images\shuffle.png" />
     <Resource Include="images\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\loop_off.png" />
+    <Resource Include="images\loop_on.png" />
+    <Resource Include="images\shuffle_off.png" />
+    <Resource Include="images\shuffle_on.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

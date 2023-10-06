@@ -75,8 +75,8 @@ namespace Project_API
         {
             Image image = sender as Image;
             string path;
-            if (isLoop) path = "loop";
-            else path = "loop"; // special loop
+            if (isLoop) path = "loop_off";
+            else path = "loop_on";
             image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
             isLoop = !isLoop;
         }
@@ -97,8 +97,8 @@ namespace Project_API
         {
             Image image = sender as Image;
             string path;
-            if (isLoop) path = "shuffle";
-            else path = "shuffle"; // special shuffle
+            if (isLoop) path = "shuffle_off";
+            else path = "shuffle_on";
             image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
             isShuffle = !isShuffle;
         }
@@ -119,8 +119,9 @@ namespace Project_API
             Random rnd = new Random();
             int temp = currentSong;
             currentSong = rnd.Next(0, songs.Length);
-            while (currentSong != temp && currentSong != temp + 1)
-                currentSong = rnd.Next(0, songs.Length);
+            if (songs.Length > 2)
+                while (currentSong != temp && currentSong != temp + 1)
+                    currentSong = rnd.Next(0, songs.Length);
         }
 
     }
