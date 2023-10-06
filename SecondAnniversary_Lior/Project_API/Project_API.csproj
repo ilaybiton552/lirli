@@ -58,6 +58,9 @@
     <Compile Include="AnniversaryWindow.xaml.cs">
       <DependentUpon>AnniversaryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MediaProgress.xaml.cs">
+      <DependentUpon>MediaProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SongInterface.xaml.cs">
       <DependentUpon>SongInterface.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MediaProgress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SongInterface.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

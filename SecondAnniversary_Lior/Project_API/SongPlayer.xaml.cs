@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Project_API
 {
@@ -28,7 +29,7 @@ namespace Project_API
         private bool isShuffle;
         private Queue<int> preSongs;
 
-        public SongPlayer(Song[] songs)
+        public SongPlayer(Song[] songs, ref MediaPlayer player)
         {
             InitializeComponent();
             preSongs = new Queue<int>();
@@ -37,8 +38,7 @@ namespace Project_API
             isPlaying = true;
             isLoop = false;
             isShuffle = false;
-            player = new MediaPlayer();
-            player.MediaEnded += Player_MediaEnded;
+            this.player = player;
             PlaySong();
         }
 
@@ -48,11 +48,6 @@ namespace Project_API
             preSongs.Append(currentSong);
             player.Open(uri);
             player.Play();
-        }
-
-        private void Player_MediaEnded(object sender, EventArgs e)
-        {
-            PlayNextSong();
         }
 
         private void Play_Click(object sender, MouseButtonEventArgs e)
@@ -100,7 +95,7 @@ namespace Project_API
             isShuffle = !isShuffle;
         }
 
-        private void PlayNextSong()
+        public void PlayNextSong()
         {
             if (!isLoop)
             {

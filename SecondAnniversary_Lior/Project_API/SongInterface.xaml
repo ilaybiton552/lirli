@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="600">
     <Grid x:Name="grid">
-            
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="songPlayerSP"/>
+        <StackPanel x:Name="progressSP" Grid.Row="1"/>
+
     </Grid>
 </UserControl>
