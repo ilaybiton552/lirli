@@ -27,24 +27,30 @@ namespace Project_API
         private bool isLoop;
         private bool isShuffle;
         private Queue<int> preSongs;
-        private Queue<int> nextSongs;
 
         public SongPlayer(string[] songs)
         {
             InitializeComponent();
             this.songs = songs;
             currentSong = 0;
-            player = new MediaPlayer();
             isPlaying = false;
             isLoop = false;
             isShuffle = false;
+            player = new MediaPlayer();
+            player.MediaEnded += Player_MediaEnded;
+            PlaySong();
         }
 
-        private void PlaySong(string path)
+        private void PlaySong()
         {
-            var uri = new Uri(path, UriKind.Relative);
+            var uri = new Uri(songs[currentSong], UriKind.Relative);
             player.Open(uri);
             player.Play();
+        }
+
+        private void Player_MediaEnded(object sender, EventArgs e)
+        {
+            PlayNextSong();
         }
 
         private void Play_Click(object sender, MouseButtonEventArgs e)
@@ -84,21 +90,38 @@ namespace Project_API
         private void Next_Click(object sender, MouseButtonEventArgs e)
         {
             player.Stop();
-            if (isShuffle) currentSong = nextSongs.Dequeue();
-            else currentSong = (currentSong + 1) % songs.Length;
-            preSongs.Append(currentSong);
-            PlaySong(songs[currentSong]);
+            PlayNextSong();
         }
 
         private void Shuffle_Click(object sender, MouseButtonEventArgs e)
         {
             Image image = sender as Image;
             string path;
-            if (isLoop) path = "loop";
-            else path = "loop"; // special shuffle
+            if (isLoop) path = "shuffle";
+            else path = "shuffle"; // special shuffle
             image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
             isShuffle = !isShuffle;
-            // TODO: add logic for shuffle songs
         }
+
+        private void PlayNextSong()
+        {
+            if (!isLoop)
+            {
+                if (isShuffle) GenerateRandomSong();
+                else currentSong = (currentSong + 1) % songs.Length;
+                preSongs.Append(currentSong);
+            }
+            PlaySong();
+        }
+
+        private void GenerateRandomSong()
+        {
+            Random rnd = new Random();
+            int temp = currentSong;
+            currentSong = rnd.Next(0, songs.Length);
+            while (currentSong != temp && currentSong != temp + 1)
+                currentSong = rnd.Next(0, songs.Length);
+        }
+
     }
 }
