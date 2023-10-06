@@ -34,7 +34,7 @@ namespace Project_API
             preSongs = new Queue<int>();
             this.songs = songs;
             currentSong = 0;
-            isPlaying = false;
+            isPlaying = true;
             isLoop = false;
             isShuffle = false;
             player = new MediaPlayer();
@@ -58,28 +58,25 @@ namespace Project_API
         private void Play_Click(object sender, MouseButtonEventArgs e)
         {
             Image image = sender as Image;
-            string path;
             if (isPlaying)
             {
-                path = @"pause";
+                image.Source = new BitmapImage(new Uri(@"images\play.png", UriKind.Relative));
                 player.Pause();
             }
             else
             {
-                path = @"play";
+                image.Source = new BitmapImage(new Uri(@"images\pause.png", UriKind.Relative));
                 player.Play();
             }
-            image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+            
             isPlaying = !isPlaying;
         }
 
         private void Loop_Click(object sender, MouseButtonEventArgs e)
         {
             Image image = sender as Image;
-            string path;
-            if (isLoop) path = @"loop_off";
-            else path = @"loop_on";
-            image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+            if (isLoop) image.Source = new BitmapImage(new Uri(@"images\loop_off.png", UriKind.Relative));
+            else image.Source = new BitmapImage(new Uri(@"images\loop_on.png", UriKind.Relative));
             isLoop = !isLoop;
         }
 
@@ -98,10 +95,8 @@ namespace Project_API
         private void Shuffle_Click(object sender, MouseButtonEventArgs e)
         {
             Image image = sender as Image;
-            string path;
-            if (isLoop) path = @"shuffle_off";
-            else path = @"shuffle_on";
-            image.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+            if (isShuffle) image.Source = new BitmapImage(new Uri(@"images\shuffle_off.png", UriKind.Relative));
+            else image.Source = new BitmapImage(new Uri(@"images\shuffle_on.png", UriKind.Relative));
             isShuffle = !isShuffle;
         }
 
@@ -121,7 +116,7 @@ namespace Project_API
             int temp = currentSong;
             currentSong = rnd.Next(0, songs.Length);
             if (songs.Length > 2)
-                while (currentSong != temp && currentSong != temp + 1)
+                while (currentSong == temp || currentSong == temp + 1)
                     currentSong = rnd.Next(0, songs.Length);
         }
 
