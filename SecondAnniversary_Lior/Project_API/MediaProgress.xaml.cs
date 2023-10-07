@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,27 +25,44 @@ namespace Project_API
         private MediaPlayer player;
         private DispatcherTimer timer;
         private int durationSeconds = 0;
+        private Stopwatch watch;
 
         public MediaProgress(ref MediaPlayer player)
         {
             InitializeComponent();
             this.player = player;
+            watch = new Stopwatch();
+            
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
             player.MediaOpened += Player_MediaOpened;
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        {
+            if (watch.IsRunning)
+            {
+                string text = SecondsToFormat((int)player.Position.TotalSeconds);
+                if (text != string.Empty) progress.Text = text;
+            }
         }
 
         private void Player_MediaOpened(object sender, EventArgs e)
         {
+            timer.Stop();
+            watch.Start();
+            progress.Text = "0:00";
+            progLine.StrokeThickness = 0;
             durationSeconds = (int)player.NaturalDuration.TimeSpan.TotalSeconds;
             duration.Text = SecondsToFormat(durationSeconds);
-            progLine.StrokeThickness = 0;
             timer.Start();
         }
 
         private string SecondsToFormat(int TotalSeconds)
         {
+            if (TotalSeconds == 0) return string.Empty;
             string format = "00";
             string result = (TotalSeconds / 60).ToString() + ':' + (TotalSeconds % 60).ToString(format);
             return result;
@@ -52,7 +70,6 @@ namespace Project_API
 
         private void TimerTick(object sender, EventArgs e)
         {
-            progress.Text = SecondsToFormat((int)player.Position.TotalSeconds);
             progLine.StrokeThickness = 5;
             progLine.X2 = 50 + (player.Position.TotalSeconds / durationSeconds) * 400;
         }

@@ -25,7 +25,10 @@ namespace Project_API
         {
             InitializeComponent();
             LoadSongs();
-            grid.Children.Add(new SongInterface(songs));
+            SongInterface songInterface = new SongInterface(songs);
+            songInterface.Width = 600;
+            songInterface.Height = 125;
+            grid.Children.Add(songInterface);
         }
 
         private void LoadSongs()
