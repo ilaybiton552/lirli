@@ -71,8 +71,19 @@ namespace Project_API
         private void TimerTick(object sender, EventArgs e)
         {
             progLine.StrokeThickness = 5;
-            progLine.X2 = 50 + (player.Position.TotalSeconds / durationSeconds) * 400;
+            cir.X1 = cir.X2 = progLine.X2 = 50 + (player.Position.TotalSeconds / durationSeconds) * 400;
         }
 
+        private void Line_MouseEnter(object sender, MouseEventArgs e)
+        {
+            progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom("#00C22C");
+            cir.StrokeThickness = 10;
+        }
+
+        private void Line_MouseLeave(object sender, MouseEventArgs e)
+        {
+            progLine.Stroke = Brushes.White;
+            cir.StrokeThickness = 0;
+        }
     }
 }
