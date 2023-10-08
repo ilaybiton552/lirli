@@ -122,9 +122,11 @@ namespace Project_API
             mouseDown = true;
         }
 
-        private void Cir_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Line_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            mouseDown = false;
+            double xMouse = Mouse.GetPosition(progLine).X;
+            cir.X1 = cir.X2 = progLine.X2 = xMouse;
+            player.Position = TimeSpan.FromSeconds((xMouse - 50) / 400 * durationSeconds);
         }
     }
 }

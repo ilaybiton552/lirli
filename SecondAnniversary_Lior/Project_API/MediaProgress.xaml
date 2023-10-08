@@ -8,9 +8,9 @@
              d:DesignHeight="25" d:DesignWidth="500">
     <Grid>
         <TextBlock x:Name="progress" Text="0:00" VerticalAlignment="Center" Margin="20, 0, 0, 0"/>
-        <Line VerticalAlignment="Center" Margin="0, 3, 0, 0" x:Name="still" X1="50" X2="450" StrokeThickness="5" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Stroke="DarkGray" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave"/>
-        <Line VerticalAlignment="Center" Margin="0, 3, 0, 0" x:Name="progLine" X1="50" X2="50" StrokeThickness="0" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Stroke="White" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave"/>
-        <Line VerticalAlignment="Center" Margin="0, 6, 0, 0" x:Name="cir" X1="50" X2="50" StrokeThickness="0" Stroke="Black" StrokeEndLineCap="Round" StrokeStartLineCap="Round" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Cir_MouseLeftButtonDown" MouseLeftButtonUp="Cir_MouseLeftButtonUp"/>
+        <Line VerticalAlignment="Center" Margin="0, 3, 0, 0" x:Name="still" X1="50" X2="450" StrokeThickness="5" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Stroke="DarkGray" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Line_MouseLeftButtonDown"/>
+        <Line VerticalAlignment="Center" Margin="0, 3, 0, 0" x:Name="progLine" X1="50" X2="50" StrokeThickness="0" StrokeEndLineCap="Round" StrokeStartLineCap="Round" Stroke="White" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Line_MouseLeftButtonDown"/>
+        <Line VerticalAlignment="Center" Margin="0, 6, 0, 0" x:Name="cir" X1="50" X2="50" StrokeThickness="0" Stroke="Black" StrokeEndLineCap="Round" StrokeStartLineCap="Round" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Cir_MouseLeftButtonDown"/>
         <TextBlock x:Name="duration" Text="0:00" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 20, 0"/>
     </Grid>
 </UserControl>
