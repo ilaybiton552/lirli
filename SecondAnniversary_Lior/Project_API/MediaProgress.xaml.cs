@@ -53,10 +53,16 @@ namespace Project_API
         {
             timer.Stop();
             watch.Start();
-            progress.Text = "0:00";
             progLine.StrokeThickness = 0;
             durationSeconds = (int)player.NaturalDuration.TimeSpan.TotalSeconds;
             duration.Text = SecondsToFormat(durationSeconds);
+            if (duration.Text.Length == 5)
+            {
+                progress.Text = "00:00";
+                progress.Margin = new Thickness(18, 0, 0, 0);
+                duration.Margin = new Thickness(0, 0, 18, 0);
+            }
+            else progress.Text = "0:00";
             timer.Start();
         }
 
@@ -64,8 +70,11 @@ namespace Project_API
         {
             if (TotalSeconds == 0) return string.Empty;
             string format = "00";
-            string result = (TotalSeconds / 60).ToString() + ':' + (TotalSeconds % 60).ToString(format);
-            return result;
+            string sec = ':' + (TotalSeconds % 60).ToString(format);
+            string result = (TotalSeconds / 60).ToString();
+            if (duration.Text.Length == 5) result = (TotalSeconds / 60).ToString(format);
+            else result = (TotalSeconds / 60).ToString();
+            return result + sec;
         }
 
         private void TimerTick(object sender, EventArgs e)
