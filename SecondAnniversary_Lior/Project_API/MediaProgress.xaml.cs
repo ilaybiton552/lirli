@@ -27,14 +27,12 @@ namespace Project_API
         private int durationSeconds = 0;
         private Stopwatch watch;
         private bool mouseDown;
-        private bool mouseIn;
 
         public MediaProgress(ref MediaPlayer player)
         {
             InitializeComponent();
             this.player = player;
             mouseDown = false;
-            mouseIn = false;
             watch = new Stopwatch();
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -102,14 +100,12 @@ namespace Project_API
 
         private void Line_MouseEnter(object sender, MouseEventArgs e)
         {
-            mouseIn = true;
             progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom("#00C22C");
             cir.StrokeThickness = 10;
         }
 
         private void Line_MouseLeave(object sender, MouseEventArgs e)
         {
-            mouseIn = false;
             if (!mouseDown)
             {
                 progLine.Stroke = Brushes.Black;
