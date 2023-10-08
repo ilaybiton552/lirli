@@ -26,13 +26,16 @@ namespace Project_API
         private DispatcherTimer timer;
         private int durationSeconds = 0;
         private Stopwatch watch;
+        private bool mouseDown;
+        private bool mouseIn;
 
         public MediaProgress(ref MediaPlayer player)
         {
             InitializeComponent();
             this.player = player;
+            mouseDown = false;
+            mouseIn = false;
             watch = new Stopwatch();
-            
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
@@ -46,6 +49,21 @@ namespace Project_API
             {
                 string text = SecondsToFormat((int)player.Position.TotalSeconds);
                 if (text != string.Empty) progress.Text = text;
+                if (mouseDown)
+                {
+                    double xMouse = Mouse.GetPosition(progLine).X;
+                    if (xMouse >= still.X1 && xMouse <= still.X2)
+                    {
+                        cir.X1 = cir.X2 = progLine.X2 = xMouse;
+                    }
+                    if (Mouse.LeftButton == MouseButtonState.Released) // left button mouse up
+                    {
+                        player.Position = TimeSpan.FromSeconds((xMouse - 50) / 400 * durationSeconds);
+                        mouseDown = false;
+                        progLine.Stroke = Brushes.White;
+                        cir.StrokeThickness = 0;
+                    }
+                }
             }
         }
 
@@ -73,26 +91,40 @@ namespace Project_API
             string sec = ':' + (TotalSeconds % 60).ToString(format);
             string result = (TotalSeconds / 60).ToString();
             if (duration.Text.Length == 5) result = (TotalSeconds / 60).ToString(format);
-            else result = (TotalSeconds / 60).ToString();
             return result + sec;
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            progLine.StrokeThickness = 5;
-            cir.X1 = cir.X2 = progLine.X2 = 50 + (player.Position.TotalSeconds / durationSeconds) * 400;
+            if (progLine.StrokeThickness != 5) progLine.StrokeThickness = 5;
+            if (!mouseDown) cir.X1 = cir.X2 = progLine.X2 = 50 + player.Position.TotalSeconds / durationSeconds * 400;
         }
 
         private void Line_MouseEnter(object sender, MouseEventArgs e)
         {
+            mouseIn = true;
             progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom("#00C22C");
             cir.StrokeThickness = 10;
         }
 
         private void Line_MouseLeave(object sender, MouseEventArgs e)
         {
-            progLine.Stroke = Brushes.White;
-            cir.StrokeThickness = 0;
+            mouseIn = false;
+            if (!mouseDown)
+            {
+                progLine.Stroke = Brushes.White;
+                cir.StrokeThickness = 0;
+            }
+        }
+
+        private void Cir_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            mouseDown = true;
+        }
+
+        private void Cir_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            mouseDown = false;
         }
     }
 }
