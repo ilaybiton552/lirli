@@ -26,8 +26,10 @@ namespace Project_API
             InitializeComponent();
             LoadSongs();
             SongInterface songInterface = new SongInterface(songs);
-            songInterface.Width = 600;
-            songInterface.Height = 125;
+            songInterface.Width = 800;
+            songInterface.Height = 75;
+            songInterface.VerticalAlignment = VerticalAlignment.Bottom;
+            songInterface.Margin = new Thickness(0, 0, 0, 15);
             grid.Children.Add(songInterface);
         }
 

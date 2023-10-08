@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace Project_API
 {
@@ -25,19 +26,36 @@ namespace Project_API
         private MediaPlayer player;
         private MediaProgress mediaProgress;
         private SongPlayer songPlayer;
+        private Song currentSong;
 
         public SongInterface(Song[] songs)
         {
             InitializeComponent();
             this.songs = songs;
+            WindowSetting();
+            this.DataContext = currentSong;
+        }
+
+        private void WindowSetting()
+        {
             player = new MediaPlayer();
             songPlayer = new SongPlayer(songs, ref player);
-            songPlayer.Width = 300;
+            songPlayer.Width = 200;
+            songPlayer.VerticalAlignment = VerticalAlignment.Center;
+            songPlayer.Margin = new Thickness(0, 0, 0, 5);
             mediaProgress = new MediaProgress(ref player);
             mediaProgress.Width = 500;
+            mediaProgress.VerticalAlignment = VerticalAlignment.Bottom;
+            grid.Children.Add(songPlayer);
+            grid.Children.Add(mediaProgress);
+            SongDetails();
             player.MediaEnded += Player_MediaEnded;
-            songPlayerSP.Children.Add(songPlayer);
-            progressSP.Children.Add(mediaProgress);
+        }
+
+        private void SongDetails()
+        {
+            currentSong = songPlayer.CurrentSong;
+
         }
 
         private void Player_MediaEnded(object sender, EventArgs e)

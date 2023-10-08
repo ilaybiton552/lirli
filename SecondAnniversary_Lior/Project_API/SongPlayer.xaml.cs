@@ -28,6 +28,8 @@ namespace Project_API
         private bool isLoop;
         private bool isShuffle;
         private Queue<int> preSongs;
+        private Song song;
+        public Song CurrentSong { get { return song; } }
 
         public SongPlayer(Song[] songs, ref MediaPlayer player)
         {
@@ -44,7 +46,8 @@ namespace Project_API
 
         private void PlaySong()
         {
-            var uri = new Uri(songs[currentSong].Path, UriKind.Relative);
+            song = songs[currentSong];
+            var uri = new Uri(song.Path, UriKind.Relative);
             preSongs.Append(currentSong);
             player.Open(uri);
             player.Play();

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project_API"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300">
+             d:DesignHeight="50" d:DesignWidth="200">
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
         <Image Grid.Column="1" Source="/images/start.png" MouseLeftButtonDown="Start_Click" />
         <Image Grid.Column="2" Source="/images/pause.png" MouseLeftButtonDown="Play_Click" />
         <Image Grid.Column="3" Source="/images/next.png" MouseLeftButtonDown="Next_Click" />
-        <Image Grid.Column="4" Margin="0, 15, 0, 0" Source="/images/loop_off.png" MouseLeftButtonDown="Loop_Click" />
+        <Image Grid.Column="4" Margin="0, 7.5, 0, 0" Source="/images/loop_off.png" MouseLeftButtonDown="Loop_Click" />
 
     </Grid>
 </UserControl>
