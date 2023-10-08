@@ -60,7 +60,7 @@ namespace Project_API
                     {
                         player.Position = TimeSpan.FromSeconds((xMouse - 50) / 400 * durationSeconds);
                         mouseDown = false;
-                        progLine.Stroke = Brushes.White;
+                        progLine.Stroke = Brushes.Black;
                         cir.StrokeThickness = 0;
                     }
                 }
@@ -112,7 +112,7 @@ namespace Project_API
             mouseIn = false;
             if (!mouseDown)
             {
-                progLine.Stroke = Brushes.White;
+                progLine.Stroke = Brushes.Black;
                 cir.StrokeThickness = 0;
             }
         }
