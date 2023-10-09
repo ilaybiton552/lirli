@@ -8,8 +8,8 @@
              d:DesignHeight="75" d:DesignWidth="825">
     <Grid x:Name="grid">
         <StackPanel Orientation="Vertical" Margin="10, 5, 0, 0" VerticalAlignment="Center">
-            <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Left" FontSize="25" FontWeight="DemiBold"/>
-            <TextBlock Text="{Binding Path=Author}" HorizontalAlignment="Left" FontSize="15"/>
+            <TextBlock x:Name="name" HorizontalAlignment="Left" FontSize="25" FontWeight="DemiBold"/>
+            <TextBlock x:Name="author" HorizontalAlignment="Left" FontSize="15"/>
         </StackPanel>
     </Grid>
 </UserControl>

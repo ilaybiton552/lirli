@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,7 +35,12 @@ namespace Project_API
             InitializeComponent();
             this.songs = songs;
             WindowSetting();
-            this.DataContext = currentSong;
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        {
+            if (player.Position.TotalSeconds == 0) SongDetails();
         }
 
         private void WindowSetting()
@@ -54,14 +60,14 @@ namespace Project_API
             grid.Children.Add(songPlayer);
             grid.Children.Add(mediaProgress);
             grid.Children.Add(mediaVolume);
-            SongDetails();
             player.MediaEnded += Player_MediaEnded;
         }
 
         private void SongDetails()
         {
             currentSong = songPlayer.CurrentSong;
-
+            name.Text = currentSong.Name;
+            author.Text = currentSong.Author;
         }
 
         private void Player_MediaEnded(object sender, EventArgs e)
