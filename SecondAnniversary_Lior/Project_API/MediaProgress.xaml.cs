@@ -46,14 +46,17 @@ namespace Project_API
             if (watch.IsRunning)
             {
                 string text = SecondsToFormat((int)player.Position.TotalSeconds);
-                if (text != string.Empty) progress.Text = text;
                 if (mouseDown)
                 {
                     double xMouse = Mouse.GetPosition(progLine).X;
                     if (xMouse >= still.X1 && xMouse <= still.X2)
                     {
                         cir.X1 = cir.X2 = progLine.X2 = xMouse;
+                        progress.Text = SecondsToFormat((int)((xMouse - still.X1) / 400 * durationSeconds));
                     }
+                    else if (xMouse > still.X2) progress.Text = duration.Text;
+                    else if (duration.Text.Length == 5) progress.Text = "00:00";
+                    else progress.Text = "0:00";
                     if (Mouse.LeftButton == MouseButtonState.Released) // left button mouse up
                     {
                         player.Position = TimeSpan.FromSeconds((xMouse - 50) / 400 * durationSeconds);
@@ -62,6 +65,7 @@ namespace Project_API
                         cir.StrokeThickness = 0;
                     }
                 }
+                else if (text != string.Empty) progress.Text = text;
             }
         }
 
