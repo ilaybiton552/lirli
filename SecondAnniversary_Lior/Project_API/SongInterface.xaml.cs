@@ -30,21 +30,113 @@ namespace Project_API
         private SongPlayer songPlayer;
         private Song currentSong;
         private MediaVolume mediaVolume;
-        private double offset;
+        private double nameOffset = 0;
+        private double authorOffset = 0;
+        private DispatcherTimer nameTimer;
+        private DispatcherTimer authorTimer;
+        private bool isNameScroll = false;
+        private bool isAuthorScroll = false;
+        private bool isNameBackword = false;
+        private bool isAuthorBackword = false;
+        private bool waitName = true;
+        private bool waitAuthor = true;
 
         public SongInterface(Song[] songs)
         {
             InitializeComponent();
             this.songs = songs;
             WindowSetting();
+            nameTimer = new DispatcherTimer();
+            nameTimer.Interval = TimeSpan.FromSeconds(2);
+            nameTimer.Tick += Name_Tick;
+            nameTimer.Start();
+            authorTimer = new DispatcherTimer();
+            authorTimer.Interval = TimeSpan.FromSeconds(2);
+            authorTimer.Tick += Author_Tick;
+            authorTimer.Start();
             CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        private void Name_Tick(object sender, EventArgs e)
+        {
+            if (waitName) waitName = false;
+            else
+            {
+                if (!isNameScroll)
+                {
+                    isNameScroll = true;
+                    nameTimer.Stop();
+                }
+            }
+        }
+
+        private void Author_Tick(object sender, EventArgs e)
+        {
+            if (waitAuthor) waitAuthor = false;
+            else
+            {
+                if (!isAuthorScroll)
+                {
+                    isAuthorScroll = true;
+                    authorTimer.Stop();
+                }
+            }
         }
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
-            if (player.Position.TotalSeconds == 0) SongDetails();
-            nameScroll.ScrollToHorizontalOffset(offset);
-            offset += .05;
+            if (player.Position.TotalSeconds == 0)
+            {
+                SongDetails();
+                isNameBackword = isNameScroll = isAuthorBackword = isAuthorScroll = false;
+                nameOffset = authorOffset = 0;
+                waitName = waitAuthor = true;
+                nameScroll.ScrollToLeftEnd();
+                authorScroll.ScrollToLeftEnd();
+                authorTimer.Stop();
+                nameTimer.Stop();
+                authorTimer.Start();
+                nameTimer.Start();
+            }
+            else
+            {
+                if (!waitName)
+                {
+                    HandleScrolling(ref nameScroll, ref isNameBackword, ref isNameScroll, ref nameOffset, ref nameTimer, ref waitName);
+                }
+                if (!waitAuthor)
+                {
+                    HandleScrolling(ref authorScroll, ref isAuthorBackword, ref isAuthorScroll, ref authorOffset, ref authorTimer, ref waitAuthor);
+                }
+            }
+        }
+
+        private void HandleScrolling(ref ScrollViewer scrollViewer, ref bool backword, ref bool scroll, ref double offset, ref DispatcherTimer timer, ref bool wait)
+        {
+            if (scrollViewer.HorizontalOffset == 0 && backword)
+            {
+                scroll = backword = false;
+                wait = true;
+                timer.Start();
+            }
+            else if (offset <= scrollViewer.HorizontalOffset + 1 && !backword && scroll)
+            {
+                scrollViewer.ScrollToHorizontalOffset(offset);
+                offset += .2;
+            }
+            else if (scroll)
+            {
+                if (!backword)
+                {
+                    wait = backword = true;
+                    timer.Start();
+                }
+                else
+                {
+                    scrollViewer.ScrollToHorizontalOffset(offset);
+                    offset -= .2;
+                }
+            }
         }
 
         private void WindowSetting()
