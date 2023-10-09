@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml.Serialization;
 
 namespace Project_API
@@ -29,6 +30,7 @@ namespace Project_API
         private SongPlayer songPlayer;
         private Song currentSong;
         private MediaVolume mediaVolume;
+        private double offset;
 
         public SongInterface(Song[] songs)
         {
@@ -41,6 +43,8 @@ namespace Project_API
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
             if (player.Position.TotalSeconds == 0) SongDetails();
+            nameScroll.ScrollToHorizontalOffset(offset);
+            offset += .05;
         }
 
         private void WindowSetting()
