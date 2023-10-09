@@ -21,3 +21,5 @@ C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\ob
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\SongPlayer.baml
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MediaProgress.g.cs
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MediaProgress.baml
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MediaVolume.g.cs
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MediaVolume.baml

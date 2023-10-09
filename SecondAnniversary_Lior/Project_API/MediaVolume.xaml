@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Project_API.MediaVolume"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_API"
+             mc:Ignorable="d" 
+             d:DesignHeight="75" d:DesignWidth="150">
+    <Grid Background="White">
+        <Image x:Name="volume" Source="/images/high-volume.png" Width="40" HorizontalAlignment="Left" MouseLeftButtonDown="Volume_MouseLeftButtonDown"/>
+        <Line x:Name="still" X1="45" X2="145" VerticalAlignment="Center" Stroke="DarkGray" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="5" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Line_MouseLeftButtonDown"/>
+        <Line x:Name="progLine" X1="45" X2="145" VerticalAlignment="Center" Stroke="Black" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="5" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Line_MouseLeftButtonDown"/>
+        <Line x:Name="cir" X1="145" X2="145" VerticalAlignment="Center" Stroke="Black" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="0" Margin="0, 3, 0, 0" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Cir_MouseLeftButtonDown"/>
+    </Grid>
+</UserControl>

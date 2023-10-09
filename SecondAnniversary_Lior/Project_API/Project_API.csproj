@@ -61,6 +61,9 @@
     <Compile Include="MediaProgress.xaml.cs">
       <DependentUpon>MediaProgress.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MediaVolume.xaml.cs">
+      <DependentUpon>MediaVolume.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SongInterface.xaml.cs">
       <DependentUpon>SongInterface.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MediaProgress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MediaVolume.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,6 +145,12 @@
     <Resource Include="images\loop_on.png" />
     <Resource Include="images\shuffle_off.png" />
     <Resource Include="images\shuffle_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\high-volume.png" />
+    <Resource Include="images\low-volume.png" />
+    <Resource Include="images\mute-volume.png" />
+    <Resource Include="images\volume.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

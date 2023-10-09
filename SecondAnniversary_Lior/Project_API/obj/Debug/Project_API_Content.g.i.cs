@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/loop_off.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/loop_on.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffle_off.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffle_on.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/high-volume.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/low-volume.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/mute-volume.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/volume.png")]
 
 

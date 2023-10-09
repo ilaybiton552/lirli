@@ -27,6 +27,7 @@ namespace Project_API
         private MediaProgress mediaProgress;
         private SongPlayer songPlayer;
         private Song currentSong;
+        private MediaVolume mediaVolume;
 
         public SongInterface(Song[] songs)
         {
@@ -46,8 +47,13 @@ namespace Project_API
             mediaProgress = new MediaProgress(ref player);
             mediaProgress.Width = 500;
             mediaProgress.VerticalAlignment = VerticalAlignment.Bottom;
+            mediaVolume = new MediaVolume(player, 0.5);
+            mediaVolume.Width = 150;
+            mediaVolume.HorizontalAlignment = HorizontalAlignment.Right;
+            mediaVolume.Margin = new Thickness(0, 0, 0, 0);
             grid.Children.Add(songPlayer);
             grid.Children.Add(mediaProgress);
+            grid.Children.Add(mediaVolume);
             SongDetails();
             player.MediaEnded += Player_MediaEnded;
         }
