@@ -20,6 +20,7 @@ namespace Project_API
     public partial class AnniversaryWindow : Window
     {
         private Song[] songs;
+        private MediaPlayer player = new MediaPlayer();
 
         public AnniversaryWindow()
         {
@@ -30,7 +31,16 @@ namespace Project_API
             songInterface.Height = 75;
             songInterface.VerticalAlignment = VerticalAlignment.Bottom;
             songInterface.Margin = new Thickness(0, 0, 0, 15);
+
+            var uri = new Uri("anniversary.wav", UriKind.Relative);
+            player.Open(uri);
+            VideoInterface videoInterface = new VideoInterface(ref player);
+            videoInterface.Width = 800;
+            videoInterface.Height = 75;
+            videoInterface.VerticalAlignment = VerticalAlignment.Top;
+
             grid.Children.Add(songInterface);
+            grid.Children.Add(videoInterface);
         }
 
         private void LoadSongs()

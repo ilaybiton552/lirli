@@ -32,7 +32,7 @@ namespace Project_API
         private string progressColor;
 
         public MediaProgress(ref MediaPlayer player, string highlightColor = "#00C22C", 
-            string circleColor = "#000000", string progressColor = "#000000")
+            string circleColor = "#000000", string progressColor = "#000000", int width = 500)
         {
             InitializeComponent();
             this.player = player;
@@ -40,6 +40,8 @@ namespace Project_API
             this.circleColor = circleColor;
             this.progressColor = progressColor;
 
+            Width = width;
+            still.X2 = width - 50;
             progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom(progressColor);
             cir.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom(circleColor);
 

@@ -25,7 +25,7 @@ namespace Project_API
         private bool mute;
         private double lastProgress;
 
-        public MediaVolume(MediaPlayer player, double mediaVolume = 1)
+        public MediaVolume(ref MediaPlayer player, double mediaVolume = 1)
         {
             InitializeComponent();
             this.player = player;

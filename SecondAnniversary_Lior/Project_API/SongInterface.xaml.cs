@@ -149,7 +149,7 @@ namespace Project_API
             mediaProgress = new MediaProgress(ref player);
             mediaProgress.Width = 500;
             mediaProgress.VerticalAlignment = VerticalAlignment.Bottom;
-            mediaVolume = new MediaVolume(player, 0.5);
+            mediaVolume = new MediaVolume(ref player, 0.5);
             mediaVolume.Width = 150;
             mediaVolume.HorizontalAlignment = HorizontalAlignment.Right;
             mediaVolume.Margin = new Thickness(0, 0, 0, 0);

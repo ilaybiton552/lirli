@@ -73,6 +73,9 @@
     <Compile Include="SongPlayer.xaml.cs">
       <DependentUpon>SongPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VideoInterface.xaml.cs">
+      <DependentUpon>VideoInterface.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WarWindow.xaml.cs">
       <DependentUpon>WarWindow.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SongPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoInterface.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
