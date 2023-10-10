@@ -102,15 +102,22 @@ namespace Project_API
                         MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
                     break;
                 case "200621":
-                    AnniversaryWindow window = new AnniversaryWindow();
+                    AnniversaryWindow anniVindow = new AnniversaryWindow();
                     player.Stop();
                     Close();
-                    window.ShowDialog();
+                    anniVindow.ShowDialog();
                     break;
                 case "240923":
-                    // TODO: create window for breakup day
-                    MessageBox.Show("Wonder how much time it took...");
+                    BreakupWindow breakupWindow = new BreakupWindow();
                     player.Stop();
+                    Close();
+                    breakupWindow.ShowDialog();
+                    break;
+                case "071023":
+                    WarWindow warWindow = new WarWindow();
+                    player.Stop();
+                    Close();
+                    warWindow.ShowDialog();
                     break;
                 default:
                     GenerateRandomHint();

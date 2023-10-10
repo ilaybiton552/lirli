@@ -58,6 +58,9 @@
     <Compile Include="AnniversaryWindow.xaml.cs">
       <DependentUpon>AnniversaryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BreakupWindow.xaml.cs">
+      <DependentUpon>BreakupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MediaProgress.xaml.cs">
       <DependentUpon>MediaProgress.xaml</DependentUpon>
     </Compile>
@@ -70,7 +73,14 @@
     <Compile Include="SongPlayer.xaml.cs">
       <DependentUpon>SongPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WarWindow.xaml.cs">
+      <DependentUpon>WarWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AnniversaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BreakupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -99,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SongPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
