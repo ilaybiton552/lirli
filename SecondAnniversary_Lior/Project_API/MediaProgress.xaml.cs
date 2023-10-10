@@ -27,11 +27,22 @@ namespace Project_API
         private int durationSeconds = 0;
         private Stopwatch watch;
         private bool mouseDown;
+        private string highlightColor;
+        private string circleColor;
+        private string progressColor;
 
-        public MediaProgress(ref MediaPlayer player)
+        public MediaProgress(ref MediaPlayer player, string highlightColor = "#00C22C", 
+            string circleColor = "#000000", string progressColor = "#000000")
         {
             InitializeComponent();
             this.player = player;
+            this.highlightColor = highlightColor;
+            this.circleColor = circleColor;
+            this.progressColor = progressColor;
+
+            progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom(progressColor);
+            cir.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom(circleColor);
+
             mouseDown = false;
             watch = new Stopwatch();
             timer = new DispatcherTimer();
@@ -52,16 +63,16 @@ namespace Project_API
                     if (xMouse >= still.X1 && xMouse <= still.X2)
                     {
                         cir.X1 = cir.X2 = progLine.X2 = xMouse;
-                        progress.Text = SecondsToFormat((int)((xMouse - still.X1) / 400 * durationSeconds));
+                        progress.Text = SecondsToFormat((int)((xMouse - still.X1) / (still.X2 - still.X1) * durationSeconds));
                     }
                     else if (xMouse > still.X2) progress.Text = duration.Text;
                     else if (duration.Text.Length == 5) progress.Text = "00:00";
                     else progress.Text = "0:00";
                     if (Mouse.LeftButton == MouseButtonState.Released) // left button mouse up
                     {
-                        player.Position = TimeSpan.FromSeconds((xMouse - 50) / 400 * durationSeconds);
+                        player.Position = TimeSpan.FromSeconds((xMouse - 50) / (still.X2 - still.X1) * durationSeconds);
                         mouseDown = false;
-                        progLine.Stroke = Brushes.Black;
+                        progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom(highlightColor);
                         cir.StrokeThickness = 0;
                     }
                 }
@@ -99,12 +110,12 @@ namespace Project_API
         private void TimerTick(object sender, EventArgs e)
         {
             if (progLine.StrokeThickness != 5) progLine.StrokeThickness = 5;
-            if (!mouseDown) cir.X1 = cir.X2 = progLine.X2 = 50 + player.Position.TotalSeconds / durationSeconds * 400;
+            if (!mouseDown) cir.X1 = cir.X2 = progLine.X2 = 50 + player.Position.TotalSeconds / durationSeconds * (still.X2 - still.X1);
         }
 
         private void Line_MouseEnter(object sender, MouseEventArgs e)
         {
-            progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom("#00C22C");
+            progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom(highlightColor);
             cir.StrokeThickness = 10;
         }
 
@@ -112,7 +123,7 @@ namespace Project_API
         {
             if (!mouseDown)
             {
-                progLine.Stroke = Brushes.Black;
+                progLine.Stroke = (SolidColorBrush)new BrushConverter().ConvertFrom(progressColor);
                 cir.StrokeThickness = 0;
             }
         }
@@ -126,7 +137,7 @@ namespace Project_API
         {
             double xMouse = Mouse.GetPosition(progLine).X;
             cir.X1 = cir.X2 = progLine.X2 = xMouse;
-            player.Position = TimeSpan.FromSeconds((xMouse - 50) / 400 * durationSeconds);
+            player.Position = TimeSpan.FromSeconds((xMouse - 50) / (still.X2 - still.X1) * durationSeconds);
         }
     }
 }

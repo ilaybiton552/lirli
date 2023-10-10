@@ -23,3 +23,7 @@ C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\ob
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MediaProgress.baml
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MediaVolume.g.cs
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MediaVolume.baml
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\BreakupWindow.g.cs
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\WarWindow.g.cs
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\BreakupWindow.baml
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\WarWindow.baml
