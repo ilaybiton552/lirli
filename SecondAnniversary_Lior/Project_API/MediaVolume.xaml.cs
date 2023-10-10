@@ -40,6 +40,7 @@ namespace Project_API
         {
             if (mouseDown)
             {
+                if (progLine.StrokeThickness == 0) progLine.StrokeThickness = 5;
                 double xMouse = Mouse.GetPosition(progLine).X;
                 double currVolume = xMouse - still.X1;
                 ChangeVolume(currVolume);
@@ -47,10 +48,23 @@ namespace Project_API
                 {
                     cir.X1 = cir.X2 = progLine.X2 = xMouse;
                     player.Volume = currVolume / 100;
+                    if (mute) mute = false;
+                }
+                else
+                {
+                    if (xMouse < still.X1)
+                    {
+                        player.Volume = 0;
+                        progLine.StrokeThickness = 0;
+                        mute = true;
+                    }
+                    else player.Volume = 1;
                 }
                 if (Mouse.LeftButton == MouseButtonState.Released)
                 {
-                    if (xMouse != still.X1) lastProgress = currVolume;
+                    if (xMouse > still.X1) lastProgress = currVolume;
+                    progLine.Stroke = Brushes.Black;
+                    cir.StrokeThickness = 0;
                     mouseDown = false;
                 }
             }
@@ -75,8 +89,9 @@ namespace Project_API
         {
             if (mute)
             {
-                player.Volume = lastProgress * 100;
+                player.Volume = lastProgress;
                 progLine.StrokeThickness = 5;
+                cir.X1 = cir.X2 = progLine.X2 = player.Volume * 100 + still.X1;
             }
             else
             {
@@ -85,14 +100,14 @@ namespace Project_API
                 progLine.StrokeThickness = 0;
             }
             mute = !mute;
-            ChangeVolume(player.Volume * 100);
+            ChangeVolume(player.Volume);
         }
 
         private void ChangeVolume(double currentVolume)
         {
             if (currentVolume <= 0) volume.Source = new BitmapImage(new Uri(@"images\mute-volume.png", UriKind.Relative));
-            else if (currentVolume < 33.33) volume.Source = new BitmapImage(new Uri(@"images\low-volume.png", UriKind.Relative));
-            else if (currentVolume > 66.66) volume.Source = new BitmapImage(new Uri(@"images\high-volume.png", UriKind.Relative));
+            else if (currentVolume < .33) volume.Source = new BitmapImage(new Uri(@"images\low-volume.png", UriKind.Relative));
+            else if (currentVolume > .66) volume.Source = new BitmapImage(new Uri(@"images\high-volume.png", UriKind.Relative));
             else volume.Source = new BitmapImage(new Uri(@"images\volume.png", UriKind.Relative));
         }
 
@@ -105,9 +120,10 @@ namespace Project_API
         {
             double xMouse = Mouse.GetPosition(progLine).X;
             if (progLine.StrokeThickness == 0) progLine.StrokeThickness = 5;
+            if (mute) mute = false;
             progLine.X2 = cir.X1 = cir.X2 = xMouse;
             lastProgress = player.Volume = (xMouse - still.X1) / 100;
-            ChangeVolume(lastProgress * 100);
+            ChangeVolume(lastProgress);
         }
 
     }
