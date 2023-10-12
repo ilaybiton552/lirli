@@ -29,3 +29,5 @@ C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\ob
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\WarWindow.baml
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\VideoInterface.g.cs
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\VideoInterface.baml
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MovingLyrics.g.cs
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MovingLyrics.baml

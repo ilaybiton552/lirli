@@ -26,6 +26,8 @@ namespace Project_API
         {
             InitializeComponent();
             LoadSongs();
+            CreateLyrics();
+
             SongInterface songInterface = new SongInterface(songs);
             songInterface.Width = 800;
             songInterface.Height = 75;
@@ -41,6 +43,20 @@ namespace Project_API
 
             grid.Children.Add(songInterface);
             grid.Children.Add(videoInterface);
+        }
+
+        private void CreateLyrics()
+        {
+            string[] lyrics =
+                {
+                    "היי לירלי", 
+                    "זאת איליי",
+                    "איך את?", 
+                    "אני אוהבת אותך לירלי"
+                };
+            double[] duration = new double[0];
+            MovingLyrics movingLyrics = new MovingLyrics(player, lyrics, duration);
+            grid.Children.Add(movingLyrics);
         }
 
         private void LoadSongs()

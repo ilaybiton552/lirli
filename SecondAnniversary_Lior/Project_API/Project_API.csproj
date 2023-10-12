@@ -67,6 +67,9 @@
     <Compile Include="MediaVolume.xaml.cs">
       <DependentUpon>MediaVolume.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MovingLyrics.xaml.cs">
+      <DependentUpon>MovingLyrics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SongInterface.xaml.cs">
       <DependentUpon>SongInterface.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MediaVolume.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovingLyrics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
