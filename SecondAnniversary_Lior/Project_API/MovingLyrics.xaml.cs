@@ -26,17 +26,15 @@ namespace Project_API
         private bool rightToLeft;
         private double fontSize;
 
-        public MovingLyrics(MediaPlayer player, string[] lyrics, double[] duration, 
-            bool rightToLeft = true, double height = 300, double width = 825, double fontSize = 20)
+        public MovingLyrics(MediaPlayer player, string lyrics, double[] duration, 
+            bool rightToLeft = true, double fontSize = 30)
         {
             InitializeComponent();
             this.player = player;
-            this.lyrics = lyrics;
+            this.lyrics = lyrics.Replace("\r\n", "").Split(new string[4] { ". ", "? ", ".", "?" }, StringSplitOptions.None).ToArray();
             this.duration = duration;
             this.rightToLeft = rightToLeft;
             this.fontSize = fontSize;
-            Width = width;
-            Height = height;
             UpdateLyrics();
         }
 
@@ -50,7 +48,9 @@ namespace Project_API
                 TextBlock textBlock = new TextBlock();
                 textBlock.Text = lyric;
                 textBlock.FontSize = fontSize;
-                textBlock.Width = Width - 200;
+                textBlock.Width = Width;
+                textBlock.TextWrapping = TextWrapping.WrapWithOverflow;
+                textBlock.Margin = new Thickness(20, 5, 20, 5);
                 sp.Children.Add(textBlock);
             }
         }

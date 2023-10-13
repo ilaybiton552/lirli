@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Project_API"
              mc:Ignorable="d" 
              d:DesignHeight="75" d:DesignWidth="150">
-    <Grid Background="White">
+    <Grid>
         <Image x:Name="volume" Source="/images/high-volume.png" Width="40" HorizontalAlignment="Left" MouseLeftButtonDown="Volume_MouseLeftButtonDown"/>
         <Line x:Name="still" X1="45" X2="145" VerticalAlignment="Center" Stroke="DarkGray" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="5" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Line_MouseLeftButtonDown"/>
         <Line x:Name="progLine" X1="45" X2="145" VerticalAlignment="Center" Stroke="Black" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="5" MouseEnter="Line_MouseEnter" MouseLeave="Line_MouseLeave" MouseLeftButtonDown="Line_MouseLeftButtonDown"/>
