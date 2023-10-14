@@ -26,6 +26,9 @@ namespace Project_API
         private bool play = false;
         private int durationSeconds = 0;
         private DispatcherTimer timer;
+        private bool pressed = false;
+
+        public bool Pressed { get { return pressed; } set { pressed = value; } }
 
         public VideoInterface(ref MediaPlayer player)
         {
@@ -79,6 +82,7 @@ namespace Project_API
 
         private void Line_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            pressed = true;
             progLine.X2 = Mouse.GetPosition(progLine).X;
             player.Position = TimeSpan.FromSeconds((progLine.X2 - still.X1) / (still.X2 - still.X1) * durationSeconds);
         }

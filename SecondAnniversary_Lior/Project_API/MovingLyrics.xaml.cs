@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,6 +29,9 @@ namespace Project_API
         private TextBlock currentTextBlock;
         private TextBlock[] lyrics;
         private bool isMediaStart = false;
+        private bool pressed = false;
+
+        public bool Pressed { set { pressed = value; } }
 
         public MovingLyrics(ref MediaPlayer player, string lyrics, double[] duration,
             bool rightToLeft = true, double fontSize = 30)
@@ -53,17 +57,6 @@ namespace Project_API
             {
                 if (player.Position.TotalSeconds < player.NaturalDuration.TimeSpan.TotalSeconds && currentTextBlockIndex < duration.Length)
                 {
-                    int currIndex = GetCurrentIndex();
-                    if (currIndex != currentTextBlockIndex)
-                    {
-                        currentTextBlockIndex = currIndex;
-                        ModifyTextBlocks(currentTextBlockIndex);
-                        Point position = currentTextBlock.TransformToAncestor(this).Transform(new Point(0, 0));
-                        if (position.Y > 40 || position.Y < 10)
-                        {
-                            scroller.ScrollToVerticalOffset(currentTextBlock.ActualHeight / 2.5 + position.Y - 40 + scroller.VerticalOffset);
-                        }
-                    }
                     if (duration[currentTextBlockIndex] <= player.Position.TotalSeconds)
                     {
                         if (currentTextBlockIndex != 0)
@@ -84,6 +77,17 @@ namespace Project_API
                         currentTextBlock.Foreground = Brushes.Blue;
                         currentTextBlock.FontWeight = FontWeights.Bold;
                         currentTextBlockIndex++;
+                    }
+                    if (pressed)
+                    {
+                        pressed = false;
+                        currentTextBlockIndex = GetCurrentIndex();
+                        ModifyTextBlocks(currentTextBlockIndex);
+                        Point position = currentTextBlock.TransformToAncestor(this).Transform(new Point(0, 0));
+                        if (position.Y > 40 || position.Y < 10)
+                        {
+                            scroller.ScrollToVerticalOffset(currentTextBlock.ActualHeight / 2.5 + position.Y - 40 + scroller.VerticalOffset);
+                        }
                     }
                 }
             }
@@ -135,8 +139,8 @@ namespace Project_API
         private int GetCurrentIndex()
         {
             int index = 0;
-            for (index = 0; index < lyrics.Length; index++) 
-                if (player.Position.TotalSeconds <= duration[index]) 
+            for (index = 0; index < duration.Length; index++) 
+                if (player.Position.TotalSeconds < duration[index]) 
                     break;
             return index;
         }
