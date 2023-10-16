@@ -30,6 +30,7 @@ namespace Project_API
             InitializeComponent();
             LoadSongs();
             CreateLyrics();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             SongInterface songInterface = new SongInterface(songs);
             songInterface.Width = 800;

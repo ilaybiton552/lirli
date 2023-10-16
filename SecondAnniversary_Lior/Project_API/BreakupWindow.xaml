@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Project_API"
         mc:Ignorable="d"
         Title="BreakupWindow" Height="450" Width="825">
-    <Grid>
+    <Grid x:Name="grid">
         
     </Grid>
 </Window>
