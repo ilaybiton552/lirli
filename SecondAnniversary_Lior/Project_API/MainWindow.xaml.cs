@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Xml.Serialization;
 using System.Media;
 using System.IO;
+using System.Windows.Media.Converters;
 
 namespace Project_API
 {
@@ -33,6 +34,8 @@ namespace Project_API
         private bool mute = false;
         private SmtpClient smtpClient;
         private MailMessage mailMessage;
+        private bool anniChosen;
+        private bool breakChosen;
 
         public MainWindow()
         {
@@ -40,8 +43,18 @@ namespace Project_API
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             GenerateArraysOfTextBox();
             LinkMail();
+            anniChosen = ExistInFile("Anniversary");
+            breakChosen = ExistInFile("Breakup");
+            AddWindowsButtons();
             FocusManager.SetFocusedElement(this, date[0]); // set focus for first input
             PlaySong();
+            Closed += Window_Closed;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            smtpClient.Dispose();
+            player.Stop();
         }
 
         private void LinkMail()
@@ -61,9 +74,29 @@ namespace Project_API
             mailMessage.Subject = "Password for Anniversary Gift";
         }
 
+        private void AddWindowsButtons()
+        {
+            if (anniChosen)
+            {
+                anniversary.Visibility = Visibility.Visible;
+            }
+            if (breakChosen)
+            {
+                breakup.Visibility = Visibility.Visible;
+            }
+            if (anniChosen && breakChosen)
+            {
+                end.Visibility = Visibility.Visible;
+            }
+            if (anniChosen || breakChosen)
+            {
+                send.Margin = new Thickness(0, 5, 0, 0);
+            }
+        }
+
         private bool ExistInFile(string line)
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "check.txt");
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "annigift.txt");
             string currLine;
             if (File.Exists(path))
             {
@@ -84,7 +117,7 @@ namespace Project_API
         {
             // get MyDocuments path
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            using (StreamWriter outputFile = new StreamWriter(System.IO.Path.Combine(path, "check.txt"), true))
+            using (StreamWriter outputFile = new StreamWriter(System.IO.Path.Combine(path, "annigift.txt"), true))
             {
                 outputFile.WriteLine(line);
             }
@@ -139,16 +172,14 @@ namespace Project_API
                         MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
                     break;
                 case "200621":
-                    if (!ExistInFile("Anniversary")) WriteToFile("Anniversary");
+                    if (!anniChosen) WriteToFile("Anniversary");
                     AnniversaryWindow anniVindow = new AnniversaryWindow();
-                    player.Stop();
                     Close();
                     anniVindow.ShowDialog();
                     break;
                 case "240923":
-                    if (!ExistInFile("Breakup")) WriteToFile("Breakup");
+                    if (!breakChosen) WriteToFile("Breakup");
                     BreakupWindow breakupWindow = new BreakupWindow();
-                    player.Stop();
                     Close();
                     breakupWindow.ShowDialog();
                     break;
@@ -282,6 +313,25 @@ namespace Project_API
                 player.Stop();
             }
             mute = !mute;
+        }
+
+        private void Anniversary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            AnniversaryWindow anniversaryWindow = new AnniversaryWindow();
+            Close();
+            anniversaryWindow.ShowDialog();
+        }
+
+        private void End_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // play freestyle
+        }
+
+        private void Breakup_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            BreakupWindow breakupWindow = new BreakupWindow();
+            Close();
+            breakupWindow.ShowDialog();
         }
     }
 }
