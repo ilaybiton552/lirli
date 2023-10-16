@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
 using System.Media;
+using System.IO;
 
 namespace Project_API
 {
@@ -30,13 +31,63 @@ namespace Project_API
         private bool blockKey = false;
         private SoundPlayer player;
         private bool mute = false;
+        private SmtpClient smtpClient;
+        private MailMessage mailMessage;
+
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             GenerateArraysOfTextBox();
+            LinkMail();
             FocusManager.SetFocusedElement(this, date[0]); // set focus for first input
             PlaySong();
+        }
+
+        private void LinkMail()
+        {
+            smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                EnableSsl = true,
+                UseDefaultCredentials = false,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Credentials = new NetworkCredential("ilaybiton6@gmail.com", "mbwe brvc mpnc szzc"),
+            };
+
+            mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("ilaybiton6@gmail.com");
+            mailMessage.To.Add("ilaybh552@gmail.com");
+            mailMessage.Subject = "Password for Anniversary Gift";
+        }
+
+        private bool ExistInFile(string line)
+        {
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "check.txt");
+            string currLine;
+            if (File.Exists(path))
+            {
+                using (StreamReader inputFile = new StreamReader(path))
+                {
+                    do
+                    {
+                        currLine = inputFile.ReadLine();
+                        if (currLine == line) return true;
+                    }
+                    while (currLine != null);
+                }
+            }
+            return false;
+        }
+
+        private void WriteToFile(string line)
+        {
+            // get MyDocuments path
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            using (StreamWriter outputFile = new StreamWriter(System.IO.Path.Combine(path, "check.txt"), true))
+            {
+                outputFile.WriteLine(line);
+            }
         }
 
         private void PlaySong()
@@ -64,20 +115,6 @@ namespace Project_API
         private void SendPass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             string password = GetPassword();
-
-            var smtpClient = new SmtpClient("smtp.gmail.com")
-            {
-                Port = 587,
-                EnableSsl = true,
-                UseDefaultCredentials = false,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                Credentials = new NetworkCredential("ilaybiton6@gmail.com", "mbwe brvc mpnc szzc"),
-            };
-
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("ilaybiton6@gmail.com");
-            mailMessage.To.Add("ilaybh552@gmail.com");
-            mailMessage.Subject = "Password for Anniversary Gift";
             mailMessage.Body = "The used password is " + password;
 
             try
@@ -102,22 +139,18 @@ namespace Project_API
                         MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
                     break;
                 case "200621":
+                    if (!ExistInFile("Anniversary")) WriteToFile("Anniversary");
                     AnniversaryWindow anniVindow = new AnniversaryWindow();
                     player.Stop();
                     Close();
                     anniVindow.ShowDialog();
                     break;
                 case "240923":
+                    if (!ExistInFile("Breakup")) WriteToFile("Breakup");
                     BreakupWindow breakupWindow = new BreakupWindow();
                     player.Stop();
                     Close();
                     breakupWindow.ShowDialog();
-                    break;
-                case "071023":
-                    WarWindow warWindow = new WarWindow();
-                    player.Stop();
-                    Close();
-                    warWindow.ShowDialog();
                     break;
                 default:
                     GenerateRandomHint();

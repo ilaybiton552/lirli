@@ -79,9 +79,6 @@
     <Compile Include="VideoInterface.xaml.cs">
       <DependentUpon>VideoInterface.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WarWindow.xaml.cs">
-      <DependentUpon>WarWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="AnniversaryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,10 +120,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VideoInterface.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
