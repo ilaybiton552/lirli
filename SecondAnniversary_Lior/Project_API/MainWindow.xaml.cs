@@ -18,6 +18,7 @@ using System.Xml.Serialization;
 using System.Media;
 using System.IO;
 using System.Windows.Media.Converters;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Project_API
 {
@@ -301,15 +302,14 @@ namespace Project_API
 
         private void ChangeImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Image image = sender as Image;
             if (mute)
             {
-                image.Source = new BitmapImage(new Uri(@"images\sound.png", UriKind.Relative));
+                sound.Source = new BitmapImage(new Uri(@"images\sound.png", UriKind.Relative));
                 player.PlayLooping();
             }
             else
             {
-                image.Source = new BitmapImage(new Uri(@"images\mute.png", UriKind.Relative));
+                sound.Source = new BitmapImage(new Uri(@"images\mute.png", UriKind.Relative));
                 player.Stop();
             }
             mute = !mute;
@@ -324,7 +324,17 @@ namespace Project_API
 
         private void End_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // play freestyle
+            MessageBox.Show("For this recording there is not going to be flowing text\nIt was a freestyle", "Notice");
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            Uri uri = new Uri("freestyle.wav", UriKind.Relative);
+            mediaPlayer.Open(uri);
+            if (!mute)
+            {
+                sound.Source = new BitmapImage(new Uri(@"images\mute.png", UriKind.Relative));
+                mute = true;
+                player.Stop();
+            }
+            mediaPlayer.Play();
         }
 
         private void Breakup_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

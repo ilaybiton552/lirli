@@ -48,7 +48,7 @@
                    MouseLeftButtonDown="Close_Click" FontFamily="Aharoni"/>
 
         <StackPanel x:Name="spSound" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Image Source="/images/sound.png" Height="35" Width="40" MouseLeftButtonDown="ChangeImage_MouseLeftButtonDown"/>
+            <Image x:Name="sound" Source="/images/sound.png" Height="35" Width="40" MouseLeftButtonDown="ChangeImage_MouseLeftButtonDown"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1">
@@ -88,7 +88,7 @@
                     MouseLeftButtonDown="SendPass_MouseLeftButtonDown">
                 <TextBlock Text="Send" Margin="0"/>
             </Border>
-            <StackPanel Orientation="Horizontal" x:Name="buttons" Margin="0, 10, 0, 0">
+            <StackPanel Orientation="Horizontal" x:Name="buttons" Margin="0, 15, 0, 0">
                 <Border CornerRadius="5" Width="95" Height="30" Margin="2.5, 0, 5, 0"
                         BorderBrush="Black" BorderThickness="1" Visibility="Hidden"
                         MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave"
