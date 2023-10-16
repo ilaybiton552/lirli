@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -113,13 +114,7 @@ namespace Project_API
 
         private void HandleScrolling(ref ScrollViewer scrollViewer, ref bool backword, ref bool scroll, ref double offset, ref DispatcherTimer timer, ref bool wait)
         {
-            if (scrollViewer.HorizontalOffset == 0 && backword)
-            {
-                scroll = backword = false;
-                wait = true;
-                timer.Start();
-            }
-            else if (offset <= scrollViewer.HorizontalOffset + 1 && !backword && scroll)
+            if (offset <= scrollViewer.HorizontalOffset + 1 && !backword && scroll)
             {
                 scrollViewer.ScrollToHorizontalOffset(offset);
                 offset += .2;
@@ -169,6 +164,26 @@ namespace Project_API
         private void Player_MediaEnded(object sender, EventArgs e)
         {
             songPlayer.PlayNextSong();
+        }
+
+        private void NameScroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (nameScroll.HorizontalOffset == 0 && isNameBackword)
+            {
+                isNameScroll = isNameBackword = false;
+                waitName = true;
+                nameTimer.Start();
+            }
+        }
+
+        private void AuthorScroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (authorScroll.HorizontalOffset == 0 && isAuthorBackword)
+            {
+                isAuthorScroll = isAuthorBackword = false;
+                waitAuthor = true;
+                authorTimer.Start();
+            }
         }
     }
 }

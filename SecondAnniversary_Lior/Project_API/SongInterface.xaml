@@ -8,10 +8,10 @@
              d:DesignHeight="75" d:DesignWidth="825">
     <Grid x:Name="grid">
         <StackPanel Orientation="Vertical" Margin="0, 5, 0, 0" VerticalAlignment="Center">
-            <ScrollViewer x:Name="nameScroll" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Width="160">
+            <ScrollViewer x:Name="nameScroll" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Width="160" MouseEnter="NameScroll_MouseEnter">
                 <TextBlock x:Name="name" HorizontalAlignment="Left" FontSize="25" FontWeight="DemiBold"/>
             </ScrollViewer>
-            <ScrollViewer x:Name="authorScroll" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Width="160">
+            <ScrollViewer x:Name="authorScroll" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Width="160" MouseEnter="AuthorScroll_MouseEnter">
                 <TextBlock x:Name="author" HorizontalAlignment="Left" FontSize="15"/>
             </ScrollViewer>
         </StackPanel>
