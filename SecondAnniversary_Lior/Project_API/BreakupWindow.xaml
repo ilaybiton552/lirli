@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_API"
         mc:Ignorable="d"
-        Title="BreakupWindow" Height="450" Width="825">
+        Title="BreakupWindow" Height="550" Width="825">
     <Grid x:Name="grid">
         
     </Grid>

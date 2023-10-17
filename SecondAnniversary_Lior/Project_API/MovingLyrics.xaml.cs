@@ -61,11 +61,7 @@ namespace Project_API
                     {
                         if (currentTextBlockIndex != 0)
                         {
-                            Point position = currentTextBlock.TransformToAncestor(this).Transform(new Point(0, 0));
-                            if (position.Y > 40 || position.Y < 10)
-                            {
-                                scroller.ScrollToVerticalOffset(currentTextBlock.ActualHeight / 2 + position.Y - 40 + scroller.VerticalOffset);
-                            }
+                            
                             if (!currentTextBlock.IsMouseOver)
                             {
                                 currentTextBlock.Foreground = Brushes.Gray;
@@ -77,6 +73,11 @@ namespace Project_API
                         currentTextBlock.Foreground = Brushes.Blue;
                         currentTextBlock.FontWeight = FontWeights.Bold;
                         currentTextBlockIndex++;
+                        Point position = currentTextBlock.TransformToAncestor(this).Transform(new Point(0, 0));
+                        if (position.Y > 40 || position.Y < 10)
+                        {
+                            scroller.ScrollToVerticalOffset(position.Y - 40 + scroller.VerticalOffset);
+                        }
                     }
                     if (pressed)
                     {
@@ -86,7 +87,7 @@ namespace Project_API
                         Point position = currentTextBlock.TransformToAncestor(this).Transform(new Point(0, 0));
                         if (position.Y > 40 || position.Y < 10)
                         {
-                            scroller.ScrollToVerticalOffset(currentTextBlock.ActualHeight / 2.5 + position.Y - 40 + scroller.VerticalOffset);
+                            scroller.ScrollToVerticalOffset(position.Y - 40 + scroller.VerticalOffset);
                         }
                     }
                 }
