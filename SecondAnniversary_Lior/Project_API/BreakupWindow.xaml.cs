@@ -23,6 +23,7 @@ namespace Project_API
         private MediaPlayer player = new MediaPlayer();
         private VideoInterface videoInterface;
         private MovingLyrics movingLyrics;
+        private SongInterface songInterface;
 
         public BreakupWindow()
         {
@@ -31,7 +32,7 @@ namespace Project_API
             CreateLyrics();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
-            SongInterface songInterface = new SongInterface(songs);
+            songInterface = new SongInterface(songs);
             songInterface.Width = 800;
             songInterface.Height = 75;
             songInterface.VerticalAlignment = VerticalAlignment.Bottom;
@@ -39,6 +40,7 @@ namespace Project_API
 
             var uri = new Uri("breakup.wav", UriKind.Relative);
             player.Open(uri);
+            player.MediaEnded += Player_MediaEnded;
             videoInterface = new VideoInterface(ref player);
             videoInterface.Width = 800;
             videoInterface.Height = 75;
@@ -48,6 +50,52 @@ namespace Project_API
             grid.Children.Add(videoInterface);
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        private void Player_MediaEnded(object sender, EventArgs e)
+        {
+            MessageBox.Show("That's it for this window!\nYou can go back to the main window\n you can also stay here and listen to the songs :)", "Notice", MessageBoxButton.OK);
+            movingLyrics.Height = 300;
+            songInterface.Margin = new Thickness(0, 0, 0, 40);
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = "Back to Main";
+            textBlock.FontSize = 25;
+            textBlock.Foreground = Brushes.Black;
+            textBlock.FontFamily = new FontFamily("David");
+            textBlock.VerticalAlignment = VerticalAlignment.Center;
+            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
+            Border border = new Border();
+            border.CornerRadius = new CornerRadius(5);
+            border.BorderBrush = Brushes.Black;
+            border.BorderThickness = new Thickness(2);
+            border.Width = 150;
+            border.Height = 30;
+            border.MouseEnter += Border_MouseEnter;
+            border.MouseLeave += Border_MouseLeave;
+            border.MouseLeftButtonDown += Border_MouseLeftButtonDown;
+            border.Background = Brushes.White;
+            border.VerticalAlignment = VerticalAlignment.Bottom;
+            border.Margin = new Thickness(0, 0, 0, 5);
+            border.Child = textBlock;
+            grid.Children.Add(border);
+        }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            songInterface.Player.Stop();
+            Close();
+            mainWindow.ShowDialog();
+        }
+
+        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = Brushes.White;
+        }
+
+        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        {
+            (sender as Border).Background = Brushes.AliceBlue;
         }
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
