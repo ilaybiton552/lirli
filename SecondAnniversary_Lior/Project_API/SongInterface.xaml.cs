@@ -42,6 +42,8 @@ namespace Project_API
         private bool waitName = true;
         private bool waitAuthor = true;
 
+        public MediaPlayer Player { get { return player; } }
+
         public SongInterface(Song[] songs)
         {
             InitializeComponent();

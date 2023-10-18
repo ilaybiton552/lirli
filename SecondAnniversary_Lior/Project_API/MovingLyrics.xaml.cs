@@ -159,9 +159,13 @@ namespace Project_API
             TextBlock textBlock = sender as TextBlock;
             if (currentTextBlock == null || !currentTextBlock.Equals(textBlock))
             {
-                if (duration[(int)textBlock.Tag] < player.Position.TotalSeconds) textBlock.Foreground = Brushes.Gray;
-                else textBlock.Foreground = Brushes.Black;
-                textBlock.FontWeight = FontWeights.Normal;
+                try
+                {
+                    if (duration[(int)textBlock.Tag] < player.Position.TotalSeconds) textBlock.Foreground = Brushes.Gray;
+                    else textBlock.Foreground = Brushes.Black;
+                    textBlock.FontWeight = FontWeights.Normal;
+                }
+                catch (Exception) { }
             }
         }
 
