@@ -27,10 +27,10 @@ namespace Birthday_Surprise
         public MainWindow()
         {
             InitializeComponent();
-            if (DateTime.Now.Day != 4 || DateTime.Now.Month != 10)
-            {
-                Close();
-            }
+            //if (DateTime.Now.Day != 31 || DateTime.Now.Month != 10)
+            //{
+            //    Close();
+            //}
 
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
