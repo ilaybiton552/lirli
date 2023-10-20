@@ -19,6 +19,7 @@ using System.Media;
 using System.IO;
 using System.Windows.Media.Converters;
 using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Media.Animation;
 
 namespace Project_API
 {
@@ -138,12 +139,25 @@ namespace Project_API
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
-            ((Border)sender).Background = Brushes.AliceBlue;
+            Border border = sender as Border;
+            border.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#50C878");
+            ColorAnimation animation = new ColorAnimation
+            {
+                To = (Color)ColorConverter.ConvertFromString("#1569C7"),
+                Duration = TimeSpan.FromSeconds(.2)
+            };
+            border.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
         }
 
         private void Border_MouseLeave(object sender, MouseEventArgs e)
         {
-            ((Border)sender).Background = Brushes.White;
+            Border border = sender as Border;
+            ColorAnimation animation = new ColorAnimation
+            {
+                To = (Color)ColorConverter.ConvertFromString("#50C878"),
+                Duration = TimeSpan.FromSeconds(.2)
+            };
+            border.Background.BeginAnimation(SolidColorBrush.ColorProperty, animation);
         }
 
         private void SendPass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
