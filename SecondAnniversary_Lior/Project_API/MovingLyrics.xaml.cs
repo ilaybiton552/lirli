@@ -30,17 +30,19 @@ namespace Project_API
         private TextBlock[] lyrics;
         private bool isMediaStart = false;
         private bool pressed = false;
+        private bool lastMargin = false;
 
         public bool Pressed { set { pressed = value; } }
 
-        public MovingLyrics(ref MediaPlayer player, string lyrics, double[] duration,
-            bool rightToLeft = true, double fontSize = 30)
+        public MovingLyrics(ref MediaPlayer player, string lyrics, double[] duration, 
+            bool lastMargin = false, bool rightToLeft = true, double fontSize = 30)
         {
             InitializeComponent();
             this.player = player;
             this.duration = duration;
             this.rightToLeft = rightToLeft;
             this.fontSize = fontSize;
+            this.lastMargin = lastMargin;
             UpdateLyrics(lyrics.Replace("\r\n", "").Split(new string[4] { ". ", "? ", ".", "?" }, StringSplitOptions.None));
             player.MediaOpened += Player_MediaOpened;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
@@ -97,12 +99,13 @@ namespace Project_API
         private void UpdateLyrics(string[] lyrics) 
         {
             int count = 0;
+            TextBlock textBlock = new TextBlock();
             StackPanel sp = lyricSP;
             if (rightToLeft) sp.FlowDirection = FlowDirection.RightToLeft;
             else sp.FlowDirection = FlowDirection.LeftToRight;
             foreach (var lyric in lyrics) 
             {
-                TextBlock textBlock = new TextBlock();
+                textBlock = new TextBlock();
                 textBlock.Text = lyric;
                 textBlock.FontSize = fontSize;
                 textBlock.Width = Width;
@@ -112,6 +115,12 @@ namespace Project_API
                 textBlock.MouseEnter += TextBlock_MouseEnter;
                 textBlock.MouseLeave += TextBlock_MouseLeave;
                 textBlock.MouseLeftButtonDown += TextBlock_MouseLeftButtonDown;
+                if (lastMargin && count == duration.Length)
+                {
+                    textBlock.Text += '?';
+                    textBlock.Margin = new Thickness(20, 225, 20, 125);
+                    textBlock.FontSize += 5;
+                }
                 sp.Children.Add(textBlock);
             }
             this.lyrics = new TextBlock[sp.Children.Count];
