@@ -11,12 +11,12 @@
         <TextBlock x:Name="tx" FontSize="20" Text="Happy Birthday" Foreground="White"
                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
         <Image x:Name="gifRight"
-               gif:ImageBehavior.RepeatBehavior="1x"
                Width="800" Height="900" HorizontalAlignment="Right" 
+               gif:ImageBehavior.RepeatBehavior="1x"
                VerticalAlignment="Bottom" Margin="0, 0, -170, -80"/>
         <Image x:Name="gifLeft"
-               gif:ImageBehavior.RepeatBehavior="1x"
                Width="800" Height="900" HorizontalAlignment="Center" Margin="800, 0, 0, -80" 
+               gif:ImageBehavior.RepeatBehavior="1x"
                VerticalAlignment="Bottom" gif:ImageBehavior.AnimationCompleted="Gif_AnimationCompleted">
             <Image.RenderTransform>
                 <ScaleTransform ScaleX="-1"/>

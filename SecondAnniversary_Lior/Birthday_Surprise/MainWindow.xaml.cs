@@ -41,10 +41,10 @@ namespace Birthday_Surprise
         public MainWindow()
         {
             InitializeComponent();
-            if (DateTime.Now.Day != 31 || DateTime.Now.Month != 10)
-            {
-                Close();
-            }
+            //if (DateTime.Now.Day != 31 || DateTime.Now.Month != 10)
+            //{
+            //    Close();
+            //}
 
             // get the screen width and height
             width = SystemParameters.PrimaryScreenWidth;
@@ -63,6 +63,19 @@ namespace Birthday_Surprise
             player.Play();
             player.Volume = .25;
             player.MediaEnded += Player_MediaEnded;
+        }
+
+        private void AddAnimationForText()
+        {
+            ColorAnimation animation = new ColorAnimation
+            {
+                To = Color.FromRgb(80, 200, 120),
+                Duration = TimeSpan.FromSeconds(.5),
+                RepeatBehavior = RepeatBehavior.Forever,
+                AutoReverse = true
+            };
+            tx.Foreground = new SolidColorBrush(Color.FromRgb(21, 105, 199));
+            tx.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, animation);
         }
 
         private void Player_MediaEnded(object sender, EventArgs e)
@@ -95,6 +108,7 @@ namespace Birthday_Surprise
             CustomMessageBox customMessageBox = new CustomMessageBox("Well that's it lol\nJust thought it would be fun to trick you like that haha\nHappy Birthday Lior❤\n(find the close button)", "Happy Birthday");
             customMessageBox.ShowDialog();
             close.Visibility = Visibility.Visible;
+            AddAnimationForText();
         }
 
         private void Border_MouseEnter(object sender, MouseEventArgs e)
