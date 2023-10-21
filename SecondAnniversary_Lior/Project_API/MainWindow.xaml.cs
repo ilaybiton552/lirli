@@ -164,6 +164,7 @@ namespace Project_API
         {
             string password = GetPassword();
             mailMessage.Body = "The used password is " + password;
+            CustomMessageBox customMessageBox = null;
 
             try
             {
@@ -171,20 +172,21 @@ namespace Project_API
             }
             catch (Exception)
             {
-                MessageBox.Show("Please check your internet connection");
+                customMessageBox = new CustomMessageBox("Please check your internet connection");
+                customMessageBox.ShowDialog();
                 return;
             }
 
             switch (password)
             {
                 case "130906":
-                    MessageBox.Show("Haha like the way you think :)\nBut this is about you not me");
+                    customMessageBox = new CustomMessageBox("Haha like the way you think :)\nBut this is about you not me");
                     break;
                 case "311006":
                     if (DateTime.Now.Day == 31 && DateTime.Now.Month == 10)
-                        MessageBox.Show("Well happy birthday Lior :)");
+                        customMessageBox = new CustomMessageBox("Well happy birthday Lior :)");
                     else
-                        MessageBox.Show("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
+                        customMessageBox = new CustomMessageBox("Hey today is NOT your birthday...\nJust trust me, make sure you turn on this computer on your birthday\nYou won't regret it😉");
                     break;
                 case "200621":
                     if (!anniChosen) WriteToFile("Anniversary");
@@ -202,7 +204,8 @@ namespace Project_API
                     GenerateRandomHint();
                     break;
             }
-
+            if (customMessageBox != null)
+                customMessageBox.ShowDialog();
         }
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
@@ -277,24 +280,20 @@ namespace Project_API
             return password;
         }
 
-        private void GenerateRandomHint()
+        private string GenerateRandomHint()
         {
             Random rnd = new Random();
             int num = rnd.Next(1, 101);
 
             if (num < 11) // 10% chance
             {
-                MessageBox.Show("Think about the breakup...");
+                return "Think about the breakup...";
             }
             else if (num > 10 && num < 61) // 50% chance
             {
-                MessageBox.Show("Anniversaryyyyyyyyy!!!!");
+               return "Anniversaryyyyyyyyy!!!!";
             }
-            else
-            {
-                MessageBox.Show("Nahhh no hint for now");
-            }
-
+            return "Nahhh no hint for now";
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -338,7 +337,8 @@ namespace Project_API
 
         private void End_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("For this recording there is not going to be flowing text\nIt was a freestyle", "Notice");
+            CustomMessageBox customMessageBox = new CustomMessageBox("For this recording there is not going to be flowing text\nIt was a freestyle", "Notice");
+            customMessageBox.ShowDialog();
             MediaPlayer mediaPlayer = new MediaPlayer();
             Uri uri = new Uri("freestyle.wav", UriKind.Relative);
             mediaPlayer.Open(uri);

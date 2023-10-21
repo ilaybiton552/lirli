@@ -56,7 +56,8 @@ namespace Project_API
 
         private void Player_MediaEnded(object sender, EventArgs e)
         {
-            MessageBox.Show("That's it for this window!\nYou can go back to the main window\n you can also stay here and listen to the songs :)", "Notice", MessageBoxButton.OK);
+            CustomMessageBox customMessageBox = new CustomMessageBox("That's it for this window!\nYou can go back to the main window\n you can also stay here and listen to the songs :)", "Notice");
+            customMessageBox.ShowDialog();
             movingLyrics.Height = 200;
             songInterface.Margin = new Thickness(0, 0, 0, 40);
             TextBlock textBlock = new TextBlock();
