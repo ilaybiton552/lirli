@@ -22,14 +22,69 @@ bool writeToFile(HANDLE readFile, HANDLE writeFile)
 	return true;
 }
 
+bool copyFile(LPCWSTR sourceFilePath, LPCWSTR destFilePath)
+{
+	HANDLE hFileDest, hFileSource;
+
+	// creating file at the destination path
+	hFileDest = CreateFile(destFilePath, GENERIC_WRITE, NULL, NULL, OPEN_ALWAYS, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+	if (hFileDest == INVALID_HANDLE_VALUE) // error opening file
+	{
+		return false;
+	}
+
+	// opening source file
+	hFileSource = CreateFile(sourceFilePath, GENERIC_READ, NULL, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hFileSource == INVALID_HANDLE_VALUE) // error opening file
+	{
+		CloseHandle(hFileDest);
+		return false;
+	}
+
+	// copies the binary data of the file from the current path to the program files path
+	if (!writeToFile(hFileSource, hFileDest))
+	{
+		CloseHandle(hFileDest);
+		CloseHandle(hFileSource);
+		return false;
+	}
+
+	CloseHandle(hFileDest);
+	CloseHandle(hFileSource);
+	return true;
+}
+
 int main()
 {
-	HANDLE hfileAutorun, hfileCopy, hfileSurprise;
+	HANDLE hfileAutorun;
 	wchar_t ownPath[MAX_PATH];
 	PCWSTR dictname = L"C:\\Program Files\\Anniversary Gift";
-	PCWSTR filenameAutorun = L"C:\\Program Files\\Anniversary Gift\\gift.exe";
 	PCWSTR filenameSurprise = L"C:\\Program Files\\Anniversary Gift\\surprise.exe";
 	HKEY openRun = nullptr;
+
+	PCWSTR sources[] =
+	{
+		L"Birthday_Surprise.exe",
+		L"confetti.gif",
+		L"confettisound.mp3",
+		L"AudioSwitcher.AudioApi.CoreAudio.dll",
+		L"AudioSwitcher.AudioApi.dll",
+		L"WpfAnimatedGif.dll",
+		L"WpfAnimatedGif.pdb",
+		L"WpfAnimatedGif.xml"
+	};
+
+	PCWSTR destinations[] =
+	{
+		L"C:\\Program Files\\Anniversary Gift\\surprise.exe",
+		L"C:\\Program Files\\Anniversary Gift\\confetti.gif",
+		L"C:\\Program Files\\Anniversary Gift\\confettisound.mp3",
+		L"C:\\Program Files\\Anniversary Gift\\AudioSwitcher.AudioApi.CoreAudio.dll",
+		L"C:\\Program Files\\Anniversary Gift\\AudioSwitcher.AudioApi.dll",
+		L"C:\\Program Files\\Anniversary Gift\\WpfAnimatedGif.dll",
+		L"C:\\Program Files\\Anniversary Gift\\WpfAnimatedGif.pdb",
+		L"C:\\Program Files\\Anniversary Gift\\WpfAnimatedGif.xml"
+	};
 
 	FreeConsole();
 	hfileAutorun = CreateFile(dictname, READ_CONTROL, NULL, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
@@ -37,34 +92,21 @@ int main()
 	{
 		mkdir("C:\\Program Files\\Anniversary Gift"); // creating new folder in program files
 
-		// creating file for the suprise (wpf)
-		hfileSurprise = CreateFile(filenameSurprise, GENERIC_WRITE, NULL, NULL, OPEN_ALWAYS, FILE_FLAG_BACKUP_SEMANTICS, NULL);
-		if (hfileSurprise == INVALID_HANDLE_VALUE) // error opening file
+		for (int i = 0; i < 8; i++)
 		{
-			return 1;
-		}
-		
-		// open the file with the current path
-		// apparantly you can use relative path 
-		hfileCopy = CreateFile(L"Birthday_Surprise.exe", GENERIC_READ, NULL, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-		if (hfileCopy == INVALID_HANDLE_VALUE)
-		{
-			return 1;
+			if (!copyFile(sources[i], destinations[i]))
+			{
+				return 1;
+			}
 		}
 
-		// copies the binary data of the file from the current path to the program files path
-		if (!writeToFile(hfileCopy, hfileSurprise))
-		{
-			return 1;
-		}
-
-		CloseHandle(hfileCopy);
-
+		// open regedit autorun
 		if (RegOpenKey(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", &openRun) != ERROR_SUCCESS)
 		{
 			return 1;
 		}
 
+		// writes to regedit autorun
 		if (RegSetValueEx(openRun, L"AnniGift", 0, REG_SZ, (LPBYTE)L"C:\\Program Files\\Anniversary Gift\\surprise.exe", MAX_PATH) != ERROR_SUCCESS)
 		{
 			return 1;
