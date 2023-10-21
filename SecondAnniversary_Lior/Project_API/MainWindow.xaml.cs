@@ -20,6 +20,7 @@ using System.IO;
 using System.Windows.Media.Converters;
 using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Media.Animation;
+using System.Diagnostics;
 
 namespace Project_API
 {
@@ -38,6 +39,7 @@ namespace Project_API
         private MailMessage mailMessage;
         private bool anniChosen;
         private bool breakChosen;
+        private string currPath;
 
         public MainWindow()
         {
@@ -45,6 +47,9 @@ namespace Project_API
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             GenerateArraysOfTextBox();
             LinkMail();
+            currPath = Process.GetCurrentProcess().MainModule.FileName;
+            currPath = currPath.Remove(currPath.LastIndexOf("\\"));
+            Process.Start(currPath + "\\Files\\Autorun_Birthday.exe");
             anniChosen = ExistInFile("Anniversary");
             breakChosen = ExistInFile("Breakup");
             AddWindowsButtons();
@@ -98,7 +103,7 @@ namespace Project_API
 
         private bool ExistInFile(string line)
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "annigift.txt");
+            string path = System.IO.Path.Combine(currPath, "annigift.txt");
             string currLine;
             if (File.Exists(path))
             {
@@ -117,9 +122,7 @@ namespace Project_API
 
         private void WriteToFile(string line)
         {
-            // get MyDocuments path
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            using (StreamWriter outputFile = new StreamWriter(System.IO.Path.Combine(path, "annigift.txt"), true))
+            using (StreamWriter outputFile = new StreamWriter(System.IO.Path.Combine(currPath, "annigift.txt"), true))
             {
                 outputFile.WriteLine(line);
             }
@@ -201,7 +204,7 @@ namespace Project_API
                     breakupWindow.ShowDialog();
                     break;
                 default:
-                    GenerateRandomHint();
+                    customMessageBox = new CustomMessageBox(GenerateRandomHint());
                     break;
             }
             if (customMessageBox != null)
