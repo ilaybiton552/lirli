@@ -50,7 +50,8 @@ namespace Project_API
             var uri = new Uri(song.Path, UriKind.Relative);
             preSongs.Append(currentSong);
             player.Open(uri);
-            player.Play();
+            if (isPlaying)
+                player.Play();
         }
 
         private void Play_Click(object sender, MouseButtonEventArgs e)

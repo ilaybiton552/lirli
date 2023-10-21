@@ -111,7 +111,7 @@ namespace Project_API
 
         private void TimerTick(object sender, EventArgs e)
         {
-            if (progLine.StrokeThickness != 5) progLine.StrokeThickness = 5;
+            if (progLine.StrokeThickness != 5 && player.Position.TotalSeconds > 0.5) progLine.StrokeThickness = 5;
             if (!mouseDown) cir.X1 = cir.X2 = progLine.X2 = 50 + player.Position.TotalSeconds / durationSeconds * (still.X2 - still.X1);
         }
 
