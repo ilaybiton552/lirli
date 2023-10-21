@@ -3,10 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowState="Maximized">
-    <Grid>
-        <TextBlock x:Name="tx" FontSize="20" Text="Happy Birthday" Foreground="White"/>
+    <Grid Margin="10">
+        <TextBlock x:Name="tx" FontSize="20" Text="Happy Birthday" Foreground="White"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
+        <Image x:Name="gifRight"
+               gif:ImageBehavior.RepeatBehavior="1x"
+               Width="800" Height="900" HorizontalAlignment="Right" 
+               VerticalAlignment="Bottom" Margin="0, 0, -170, -80"/>
+        <Image x:Name="gifLeft"
+               gif:ImageBehavior.RepeatBehavior="1x"
+               Width="800" Height="900" HorizontalAlignment="Center" Margin="800, 0, 0, -80" 
+               VerticalAlignment="Bottom" gif:ImageBehavior.AnimationCompleted="Gif_AnimationCompleted">
+            <Image.RenderTransform>
+                <ScaleTransform ScaleX="-1"/>
+            </Image.RenderTransform>
+        </Image>
+        <Canvas x:Name="canvas">
+            <Border CornerRadius="5" BorderThickness="1" BorderBrush="Black" 
+                    Width="200" Height="60" MouseEnter="Border_MouseEnter"
+                    MouseLeave="Border_MouseLeave" Visibility="Hidden" x:Name="close"
+                    MouseLeftButtonDown="Border_MouseLeftButtonDown" Background="#50C878">
+                <TextBlock Text="Close" FontSize="40" FontFamily="David" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+        </Canvas>
     </Grid>
 </Window>
