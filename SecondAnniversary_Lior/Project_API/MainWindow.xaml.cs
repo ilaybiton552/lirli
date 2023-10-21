@@ -341,16 +341,14 @@ namespace Project_API
         {
             CustomMessageBox customMessageBox = new CustomMessageBox("For this recording there is not going to be flowing text\nIt was a freestyle", "Notice");
             customMessageBox.ShowDialog();
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            Uri uri = new Uri("freestyle.wav", UriKind.Relative);
-            mediaPlayer.Open(uri);
             if (!mute)
             {
                 sound.Source = new BitmapImage(new Uri(@"images\mute.png", UriKind.Relative));
                 mute = true;
                 player.Stop();
             }
-            mediaPlayer.Play();
+            FreestyleProgress freestyleProgress = new FreestyleProgress();
+            freestyleProgress.Show();
         }
 
         private void Breakup_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

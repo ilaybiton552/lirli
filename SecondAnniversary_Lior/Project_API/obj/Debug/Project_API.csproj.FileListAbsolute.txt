@@ -31,3 +31,5 @@ C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\ob
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\MovingLyrics.baml
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\CustomMessageBox.g.cs
 C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\CustomMessageBox.baml
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\FreestyleProgress.g.cs
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Project_API\obj\Debug\FreestyleProgress.baml
