@@ -8,9 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/high-volume.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/low-volume.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/mute-volume.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/volume.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon.ico")]
 
 

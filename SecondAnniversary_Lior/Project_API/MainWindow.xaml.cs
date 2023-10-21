@@ -49,7 +49,6 @@ namespace Project_API
             LinkMail();
             currPath = Process.GetCurrentProcess().MainModule.FileName;
             currPath = currPath.Remove(currPath.LastIndexOf("\\"));
-            Process.Start(currPath + "\\Files\\Autorun_Birthday.exe");
             anniChosen = ExistInFile("Anniversary");
             breakChosen = ExistInFile("Breakup");
             AddWindowsButtons();

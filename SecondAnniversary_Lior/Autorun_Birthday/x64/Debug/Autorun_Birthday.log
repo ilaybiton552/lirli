@@ -1,3 +1,4 @@
 ﻿  main.cpp
-C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Autorun_Birthday\main.cpp(60,10): warning C4101: 'ownPath': unreferenced local variable
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Autorun_Birthday\main.cpp(28,10): warning C4101: 'ownPath': unreferenced local variable
+C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\Autorun_Birthday\main.cpp(61,10): warning C4101: 'ownPath': unreferenced local variable
   Autorun_Birthday.vcxproj -> C:\Users\test0\OneDrive\מסמכים\Lirli\SecondAnniversary_Lior\x64\Debug\Autorun_Birthday.exe

